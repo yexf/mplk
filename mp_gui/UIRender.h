@@ -29,6 +29,8 @@ class UILIB_API CRenderEngine
 {
 public:
     static DWORD AdjustColor(DWORD dwColor, short H, short S, short L);
+	static HBITMAP StretchImage(HBITMAP hbitmap,int nX,int nY,int sX,int sY);
+	static HBITMAP LoadImage(const char* bitmap,int *nX = NULL,int *nY = NULL);
     static TImageInfo* LoadImage(STRINGorID bitmap, LPCTSTR type = NULL, DWORD mask = 0);
     static void DrawImage(HDC hDC, HBITMAP hBitmap, const RECT& rc, const RECT& rcPaint, \
         const RECT& rcBmpPart, const RECT& rcCorners, bool alphaChannel, BYTE uFade = 255, 

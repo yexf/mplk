@@ -16,6 +16,7 @@
 #error "DuiLib 库只能用于C++程序，请把文件的后缀名改为'cpp'"
 #endif
 
+#include <olectl.h>
 #include "..\mp_gui\UIlib.h"
 
 #ifdef _DEBUG

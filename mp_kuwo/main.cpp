@@ -1,20 +1,25 @@
-#include "ybyt.h"
+#include "pch.h"
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int nCmdShow)
 {
 	CPaintManagerUI::SetInstance(hInstance);
-	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath() + _T(".\\skin"));
-	//CPaintManagerUI::SetResourceZip(_T("skin.zip"));
+
+#ifdef SKIN_ZIP
+	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath());
+	CPaintManagerUI::SetResourceZip("skin.dat");
+#else
+	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath()+"skin");
+#endif	
 
 	HRESULT Hr = ::CoInitialize(NULL);
 	if( FAILED(Hr) ) return 0;
 
-	CKuWo* player = new CKuWo();
-	
-	player->Create(NULL, _T("¿áÎÒÒôÀÖºÐ"), UI_WNDSTYLE_FRAME, 0L);
-	player->CenterWindow();
-	player->ShowWindow();
-	CPaintManagerUI::MessageLoop();
+	wxf_kuwo* kuwo = new wxf_kuwo();
 
+	kuwo->Create(NULL, "¿áÎÒÒôÀÖºÐ", UI_WNDSTYLE_FRAME, 0L);
+	kuwo->CenterWindow();
+	kuwo->ShowWindow();
+	CPaintManagerUI::MessageLoop();
+	delete kuwo;
 	::CoUninitialize();
 	return 0;
 }

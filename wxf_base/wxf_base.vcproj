@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="wxf_comm"
-	ProjectGUID="{95D376A2-4DB3-4956-9BF9-924FA07F840F}"
-	RootNamespace="wxf_comm"
+	Name="wxf_base"
+	ProjectGUID="{8A674851-7A7B-4A92-8892-B1F14C20FD4F}"
+	RootNamespace="wxf_base"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
@@ -155,7 +155,23 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\wxf_comm.c"
+				RelativePath=".\wxf_base.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_file.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_lock.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_log.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_str.cpp"
 				>
 			</File>
 		</Filter>
@@ -165,7 +181,27 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\wxf_comm.h"
+				RelativePath=".\wxf_base.h"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_define.h"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_file.h"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_lock.h"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_log.h"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_str.h"
 				>
 			</File>
 		</Filter>

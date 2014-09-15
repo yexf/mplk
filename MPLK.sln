@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mp_gui", "mp_gui\mp_gui.vcproj", "{33D4230E-EE4A-4D67-8CD1-B512C50F6AFD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mp_kuwo", "mp_kuwo\mp_kuwo.vcproj", "{3E7FA21D-8FF6-4704-AFE8-75CDC8CD3162}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wxf_base", "wxf_base\wxf_base.vcproj", "{8A674851-7A7B-4A92-8892-B1F14C20FD4F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33D4230E-EE4A-4D67-8CD1-B512C50F6AFD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{33D4230E-EE4A-4D67-8CD1-B512C50F6AFD}.Debug|Win32.Build.0 = Debug|Win32
+		{33D4230E-EE4A-4D67-8CD1-B512C50F6AFD}.Release|Win32.ActiveCfg = Release|Win32
+		{33D4230E-EE4A-4D67-8CD1-B512C50F6AFD}.Release|Win32.Build.0 = Release|Win32
+		{3E7FA21D-8FF6-4704-AFE8-75CDC8CD3162}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3E7FA21D-8FF6-4704-AFE8-75CDC8CD3162}.Debug|Win32.Build.0 = Debug|Win32
+		{3E7FA21D-8FF6-4704-AFE8-75CDC8CD3162}.Release|Win32.ActiveCfg = Release|Win32
+		{3E7FA21D-8FF6-4704-AFE8-75CDC8CD3162}.Release|Win32.Build.0 = Release|Win32
+		{8A674851-7A7B-4A92-8892-B1F14C20FD4F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8A674851-7A7B-4A92-8892-B1F14C20FD4F}.Debug|Win32.Build.0 = Debug|Win32
+		{8A674851-7A7B-4A92-8892-B1F14C20FD4F}.Release|Win32.ActiveCfg = Release|Win32
+		{8A674851-7A7B-4A92-8892-B1F14C20FD4F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

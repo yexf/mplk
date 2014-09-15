@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\include"
+				AdditionalIncludeDirectories="..\include;..\wxf_base"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -165,15 +165,23 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\KuWo.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\main.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\wxf_add.cpp"
+				RelativePath=".\wxf_filedlg.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_kuwo.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_listitem.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_playctl.cpp"
 				>
 			</File>
 			<File
@@ -184,10 +192,6 @@
 				RelativePath=".\wxf_playlist.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\wxf_plitem.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Í·ÎÄ¼þ"
@@ -195,11 +199,23 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\KuWo.h"
+				RelativePath=".\pch.h"
 				>
 			</File>
 			<File
-				RelativePath=".\wxf_add.h"
+				RelativePath=".\wxf_filedlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_kuwo.h"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_listitem.h"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_playctl.h"
 				>
 			</File>
 			<File
@@ -208,14 +224,6 @@
 			</File>
 			<File
 				RelativePath=".\wxf_playlist.h"
-				>
-			</File>
-			<File
-				RelativePath=".\wxf_plitem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ybyt.h"
 				>
 			</File>
 		</Filter>

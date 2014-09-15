@@ -282,7 +282,132 @@ DWORD CRenderEngine::AdjustColor(DWORD dwColor, short H, short S, short L)
     HSLtoRGB(&dwColor, fH, fS, fL);
     return dwColor;
 }
+HBITMAP CRenderEngine::StretchImage(HBITMAP hbitmap,int dX,int dY,int sX,int sY)
+{
+	return NULL;
+	/*HDC hTempDC = ::GetDC(NULL);
+	HDC hCloneDC = ::CreateCompatibleDC(hTempDC);
+	if (NULL == hTempDC )
+		return NULL;
 
+	HBITMAP hTempBmp = NULL;
+	::SelectObject (hCloneDC, hTempBmp);
+	::SelectObject (hTempDC, hbitmap);
+	BLENDFUNCTION bf = { AC_SRC_OVER, 0, 255, AC_SRC_ALPHA };
+	AlphaBitBlt(hCloneDC,0,0,dX,dY,hTempDC,0,0,sX,sY,bf);
+
+	hTempBmp = (HBITMAP)::SelectObject (hTempDC, NULL);
+	
+	::DeleteDC(hTempDC);
+	::DeleteDC(hCloneDC);
+	
+	return hTempBmp;*/
+}
+HBITMAP CRenderEngine::LoadImage(const char* bitmap,int *nX,int *nY)
+{
+	LPBYTE pData = NULL;
+	DWORD dwSize = 0;
+
+
+	CStdString sFile = CPaintManagerUI::GetResourcePath();
+	if( CPaintManagerUI::GetResourceZip().IsEmpty() ) {
+		sFile += bitmap;
+		HANDLE hFile = ::CreateFile(sFile.GetData(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, \
+			FILE_ATTRIBUTE_NORMAL, NULL);
+		if( hFile == INVALID_HANDLE_VALUE ) return NULL;
+		dwSize = ::GetFileSize(hFile, NULL);
+		if( dwSize == 0 ) return NULL;
+
+		DWORD dwRead = 0;
+		pData = new BYTE[ dwSize ];
+		::ReadFile( hFile, pData, dwSize, &dwRead, NULL );
+		::CloseHandle( hFile );
+
+		if( dwRead != dwSize ) {
+			delete[] pData;
+			return NULL;
+		}
+	}
+	else {
+		sFile += CPaintManagerUI::GetResourceZip();
+		HZIP hz = OpenZip((void*)sFile.GetData(), 0, 2);
+		ZIPENTRY ze; 
+		int i; 
+		if( FindZipItem(hz, bitmap, true, &i, &ze) != 0 ) return NULL;
+		dwSize = ze.unc_size;
+		if( dwSize == 0 ) return NULL;
+		pData = new BYTE[ dwSize ];
+		int res = UnzipItem(hz, i, pData, dwSize, 3);
+		if( res != 0x00000000 && res != 0x00000600) {
+			delete[] pData;
+			CloseZip(hz);
+			return NULL;
+		}
+		CloseZip(hz);
+	}
+	
+	
+
+	LPBYTE pImage = NULL;
+	int x,y,n;
+	pImage = stbi_load_from_memory(pData, dwSize, &x, &y, &n, 4);
+	delete[] pData;
+	if( !pImage ) return NULL;
+
+	BITMAPINFO bmi;
+	::ZeroMemory(&bmi, sizeof(BITMAPINFO));
+	bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+	bmi.bmiHeader.biWidth = x;
+	bmi.bmiHeader.biHeight = -y;
+	bmi.bmiHeader.biPlanes = 1;
+	bmi.bmiHeader.biBitCount = 32;
+	bmi.bmiHeader.biCompression = BI_RGB;
+	bmi.bmiHeader.biSizeImage = x * y * 4;
+
+	bool bAlphaChannel = false;
+	LPBYTE pDest = NULL;
+	HBITMAP hBitmap = ::CreateDIBSection(NULL, &bmi, DIB_RGB_COLORS, (void**)&pDest, NULL, 0);
+	if( !hBitmap ) return NULL;
+
+	for( int i = 0; i < x * y; i++ ) 
+	{
+		pDest[i*4 + 3] = pImage[i*4 + 3];
+		if( pDest[i*4 + 3] < 255 )
+		{
+			pDest[i*4] = (BYTE)(DWORD(pImage[i*4 + 2])*pImage[i*4 + 3]/255);
+			pDest[i*4 + 1] = (BYTE)(DWORD(pImage[i*4 + 1])*pImage[i*4 + 3]/255);
+			pDest[i*4 + 2] = (BYTE)(DWORD(pImage[i*4])*pImage[i*4 + 3]/255); 
+			bAlphaChannel = true;
+		}
+		else
+		{
+			pDest[i*4] = pImage[i*4 + 2];
+			pDest[i*4 + 1] = pImage[i*4 + 1];
+			pDest[i*4 + 2] = pImage[i*4]; 
+		}
+
+		/*if( *(DWORD*)(&pDest[i*4]) == mask ) {
+			pDest[i*4] = (BYTE)0;
+			pDest[i*4 + 1] = (BYTE)0;
+			pDest[i*4 + 2] = (BYTE)0; 
+			pDest[i*4 + 3] = (BYTE)0;
+			bAlphaChannel = true;
+		}*/
+	}
+
+	stbi_image_free(pImage);
+
+	if (nX != NULL)
+	{
+		*nX = x;
+	}
+	if (nY != NULL)
+	{
+		*nY = y;
+	}
+
+	return hBitmap;
+}
 TImageInfo* CRenderEngine::LoadImage(STRINGorID bitmap, LPCTSTR type, DWORD mask)
 {
     LPBYTE pData = NULL;
