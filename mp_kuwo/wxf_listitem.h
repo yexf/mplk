@@ -15,20 +15,24 @@ class wxf_listitem
 public:
 	wxf_listitem(void);
 	~wxf_listitem(void);
-	wxf_listitem(int no,const char *file_name = "");
+	wxf_listitem(int no,const char *file_name);
 	int get_no(void) {return m_no;}
+	int set_no(int no);
+
 	const char *get_file(void) {return m_path;}
+	int set_file(const char *file_name);
+
 	void set_next(wxf_listitem *next) {m_next = next;}
 	wxf_listitem *get_next(){return m_next;}
 public:
-	int set_no(int no);
-	int set_file(const char *file_name);
-
 	int add_to(CListUI *plist);
 	int remove_form(CListUI *plist);
 private:
 	void init();
 	void deinit();
+	
+	
+
 
 private:
 	CLabelUI *m_listno;

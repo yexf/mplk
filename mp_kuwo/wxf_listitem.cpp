@@ -3,31 +3,11 @@
 
 wxf_listitem::wxf_listitem(void)
 {
-	m_listno = NULL;
-	m_songname = NULL;
-	m_singername = NULL;
-	m_mvflag = NULL;
-
-	m_nop = NULL;
-	m_phl = NULL;
-	m_item = NULL;
-	m_next = NULL;
 	init();
 }
 wxf_listitem::wxf_listitem(int no,const char *file_name)
 {
-	m_listno = NULL;
-	m_songname = NULL;
-	m_singername = NULL;
-	m_mvflag = NULL;
-
-	m_nop = NULL;
-	m_phl = NULL;
-	m_item = NULL;
-
-	m_next = NULL;
 	init();
-
 	set_file(file_name);
 	set_no(no);
 }
@@ -51,6 +31,24 @@ void wxf_listitem::deinit(void)
 }
 void wxf_listitem::init(void)
 {
+	m_listno = NULL;
+	m_songname = NULL;
+	m_singername = NULL;
+	m_mvflag = NULL;
+
+	m_nop = NULL;
+	m_phl = NULL;
+	m_item = NULL;
+	m_next = NULL;
+
+	m_id3.Title = NULL;
+	m_id3.Artist = NULL;
+	m_id3.Album = NULL;
+	m_id3.Year = NULL;
+	m_id3.Comment = NULL;
+	m_id3.TrackNum = NULL; 
+	m_id3.Genre = NULL;
+
 	m_item = new CListContainerElementUI;
 	m_phl = new CHorizontalLayoutUI;
 
@@ -84,8 +82,6 @@ void wxf_listitem::init(void)
 	m_songname->SetAttribute("textcolor","#7f1f1f1f");
 	m_singername->SetAttribute("textcolor","#7f1f1f1f");
 
-
-	
 }
 int wxf_listitem::set_no(int no)
 {
@@ -101,12 +97,14 @@ int wxf_listitem::set_no(int no)
 int wxf_listitem::set_file(const char *file_name)
 {
 	m_path = file_name;
+	wxf_str temp(file_name);
 
-	//wxf_kuwo::g_kuwo->m_player->loadid3(file_name,m_id3);
-	wxf_player::LoadID3(file_name,m_id3);
+	temp = temp.split_last('\\');
+	m_singername->SetText(temp.split_last('-', false));
 
-	m_singername->SetText(m_id3.Artist);
-	m_songname->SetText(m_id3.Title);
+	temp = temp.split_last('-');
+	m_songname->SetText(temp.split_last('.', false));
+	
 	return wxf_succ;
 }
 int wxf_listitem::add_to(CListUI *plist)
