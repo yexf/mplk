@@ -4,11 +4,55 @@
 
 #pragma warning(disable:4996)
 
+wxf_str operator + (const wxf_str & a, const wxf_str & b)
+{
+	wxf_str tmp;
+	tmp.reserve(a.length() + b.length());
+	tmp += a;
+	tmp += b;
+	return tmp;
+}
+
+wxf_str operator + (const wxf_str & a, const char* b)
+{
+	wxf_str tmp;
+	wxf_str::size_type b_len = static_cast<wxf_str::size_type>( strlen(b) );
+	tmp.reserve(a.length() + b_len);
+	tmp += a;
+	tmp.append(b, b_len);
+	return tmp;
+}
+
+wxf_str operator + (const char* a, const wxf_str & b)
+{
+	wxf_str tmp;
+	wxf_str::size_type a_len = static_cast<wxf_str::size_type>( strlen(a) );
+	tmp.reserve(a_len + b.length());
+	tmp.append(a, a_len);
+	tmp += b;
+	return tmp;
+}
+
 // Error value for find primitive
 const wxf_str::size_type wxf_str::npos = static_cast< wxf_str::size_type >(-1);
 wxf_str::Rep wxf_str::nullrep_ = { 0, 0, { '\0' } };
 
 
+void wxf_str::resize( size_type cap )
+{
+	if (cap > capacity())
+	{
+		wxf_str tmp;
+		tmp.init(0, cap);
+		swap(tmp);
+	}
+	else
+	{
+		set_size(0);
+	}
+}
+
+//扩容,保持数据不变
 void wxf_str::reserve (size_type cap)
 {
 	if (cap > capacity())
@@ -20,7 +64,7 @@ void wxf_str::reserve (size_type cap)
 	}
 }
 
-
+//重新初始化
 wxf_str& wxf_str::assign(const char* str, size_type len)
 {
 	size_type cap = capacity();
@@ -33,13 +77,13 @@ wxf_str& wxf_str::assign(const char* str, size_type len)
 	}
 	else
 	{
-		memmove(start(), str, len);
+		memmove(start(), str, len);	
 		set_size(len);
 	}
 	return *this;
 }
 
-
+//在后面添加
 wxf_str& wxf_str::append(const char* str, size_type len)
 {
 	size_type newsize = length() + len;
@@ -51,6 +95,7 @@ wxf_str& wxf_str::append(const char* str, size_type len)
 	set_size(newsize);
 	return *this;
 }
+//格式化字符串
 int wxf_str::format(const char* fmt, ...)
 {
 	// if the format string is NULL ,return 
@@ -168,31 +213,43 @@ int wxf_str::format(const char* fmt, ...)
 	return nMaxLen;
 }
 
-wxf_str operator + (const wxf_str & a, const wxf_str & b)
+wxf_str wxf_str::substr( size_type start, size_type end /*= size()*/ )
 {
-	wxf_str tmp;
-	tmp.reserve(a.length() + b.length());
-	tmp += a;
-	tmp += b;
-	return tmp;
+	assert(start <= end);
+	if (end > size())
+	{
+		end = size();
+	}
+	size_type len = end - start;
+	return wxf_str(data()+start,len);
 }
 
-wxf_str operator + (const wxf_str & a, const char* b)
+wxf_str wxf_str::split( size_t Pos, bool IsLast, bool DelSplit)
 {
-	wxf_str tmp;
-	wxf_str::size_type b_len = static_cast<wxf_str::size_type>( strlen(b) );
-	tmp.reserve(a.length() + b_len);
-	tmp += a;
-	tmp.append(b, b_len);
-	return tmp;
-}
-
-wxf_str operator + (const char* a, const wxf_str & b)
-{
-	wxf_str tmp;
-	wxf_str::size_type a_len = static_cast<wxf_str::size_type>( strlen(a) );
-	tmp.reserve(a_len + b.length());
-	tmp.append(a, a_len);
-	tmp += b;
-	return tmp;
+	if (Pos >= size())
+	{
+		return *this;
+	}
+	if(DelSplit)
+	{
+		if (IsLast)
+		{
+			return substr(Pos+1);
+		}
+		else
+		{
+			return substr(0, Pos);
+		}
+	}
+	else
+	{
+		if (IsLast)
+		{
+			return substr(Pos);
+		}
+		else
+		{
+			return substr(0, Pos+1);
+		}
+	}
 }
