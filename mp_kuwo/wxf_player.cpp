@@ -426,8 +426,10 @@ int __stdcall wxf_player::libzplay_hdl(void* instance,
 	wxf_player *player;
 
 	player = static_cast<wxf_player *>(user_data);
-
-	player->m_state = EM_OVER;
+	if (player->m_state == EM_PLAY)
+	{
+		player->m_state = EM_OVER;
+	}
 
 	return 0;
 }
