@@ -20,7 +20,10 @@ wxf_listitem *wxf_playlist::get_next(void)
 	
 	pitem = find_item(m_nplay);
 	pitem = get_next(pitem);
-	m_nplay = pitem->get_no();
+	if (pitem)
+	{
+		m_nplay = pitem->get_no();
+	}	
 	return pitem;
 }
 wxf_listitem *wxf_playlist::get_pre(wxf_listitem *pitem)
