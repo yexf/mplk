@@ -137,13 +137,25 @@ void wxf_kuwo::Timer()
 
 void wxf_kuwo::AddFile()
 {
-	wxf_str	temp;
+	vector<wxf_str>	temp;
 	//wxf_filedlg dlg(m_hWnd,wxf_filedlg::filedir_dlg);
 	wxf_filedlg dlg(m_hWnd);
 	if (dlg.doModel(temp))
 	{
-		m_playlist->add_item(temp);
-		m_playctl->play(m_playlist);
+		if (temp.size() == 1)
+		{
+			m_playlist->add_item(temp[0]);
+			m_playctl->play(m_playlist);
+		}
+		else
+		{
+			for (size_t i = 1; i < temp.size(); i++)
+			{
+				m_playlist->add_item(temp[i]);
+				m_playctl->play(m_playlist);
+			}
+		}
+				
 	}
 	
 	return ;

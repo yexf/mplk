@@ -20,6 +20,7 @@ public:
 	enum wxf_player_em
 	{
 		EM_ERR,
+		EM_UNINIT,
 		EM_INIT,
 		EM_READY,
 		EM_PLAY,
