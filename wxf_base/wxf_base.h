@@ -210,7 +210,7 @@ int wxf_msg_box(const char *fmt,...);
 #include "wxf_log.h"
 
 #ifndef WXF_LIB
-#pragma comment(lib,"wxf_base.lib")
+#pragma comment(lib,"../lib/wxf_base.lib")
 #pragma comment(lib,"ws2_32.lib")
 #endif
 

@@ -44,7 +44,7 @@ class wxf_str
 	}
 
 	// wxf_str constructor, based on a string
-	explicit wxf_str ( const char * copy) : rep_(0)
+	wxf_str ( const char * copy) : rep_(0)
 	//wxf_str ( const char * copy) : rep_(0)
 	{
 		if (copy == NULL)
