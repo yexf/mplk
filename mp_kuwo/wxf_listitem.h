@@ -19,7 +19,7 @@ public:
 	int get_no(void) {return m_no;}
 	int set_no(int no);
 
-	const char *get_file(void) {return m_path;}
+	const char *get_file(void) {return m_path.c_str();}
 	int set_file(const char *file_name);
 
 	void set_next(wxf_listitem *next) {m_next = next;}

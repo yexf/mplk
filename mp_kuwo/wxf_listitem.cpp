@@ -100,10 +100,10 @@ int wxf_listitem::set_file(const char *file_name)
 	wxf_str temp(file_name);
 
 	temp = temp.split_last('\\');
-	m_singername->SetText(temp.split_last('-', false));
+	m_singername->SetText(temp.split_last('-', false).c_str());
 
 	temp = temp.split_last('-');
-	m_songname->SetText(temp.split_last('.', false));
+	m_songname->SetText(temp.split_last('.', false).c_str());
 	
 	return wxf_succ;
 }

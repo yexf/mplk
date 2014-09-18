@@ -191,7 +191,7 @@ int wxf_playctl::len_time(CLabelUI *plabel)
 
 	str.format("%02d:%02d",m,s);
 
-	plabel->SetText(str);
+	plabel->SetText(str.c_str());
 	return ret;
 }
 int wxf_playctl::cur_time(CLabelUI *plabel)
@@ -206,7 +206,7 @@ int wxf_playctl::cur_time(CLabelUI *plabel)
 	m = time.hms.minute;
 
 	str.format("%02d:%02d",m,s);
-	plabel->SetText(str);
+	plabel->SetText(str.c_str());
 	return ret;
 }
 int wxf_playctl::draw_fft(HWND hWnd,CControlUI *pctl)
