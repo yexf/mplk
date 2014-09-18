@@ -65,6 +65,30 @@ class wxf_str
 		memcpy(start(), str, len);
 	}
 
+	// wxf_str constructor, based on a string
+	explicit wxf_str ( int num) : rep_(0)
+	{
+		format("%d",num);
+	}
+
+	// wxf_str constructor, based on a string
+	explicit wxf_str ( double num) : rep_(0)
+	{
+		format("%g",num);
+	}
+
+	// wxf_str constructor, based on a string
+	//operator double () const
+	//{
+	//	return atof(data());
+	//}
+
+	//// wxf_str constructor, based on a string
+	//operator int () const
+	//{
+	//	return atoi(data());
+	//}
+
 	// wxf_str destructor
 	~wxf_str ()
 	{
@@ -237,7 +261,6 @@ private:
 
 
 public:
-	operator const char *()	{ return c_str(); }
 
 	//¸ñÊ½»¯×Ö·û´® by yexf
 	int format(const char* fmt, ...);
@@ -256,7 +279,10 @@ public:
 	}
 
 	wxf_str split(size_t Pos, bool IsLast, bool DelSplit);
+	
+	wxf_str &assign_addend(const char *str,const char ch);
 
+	wxf_str &assign_delend(const char *str,const char ch);
 };
 
 inline bool operator == (const wxf_str & a, const wxf_str & b)

@@ -253,3 +253,27 @@ wxf_str wxf_str::split( size_t Pos, bool IsLast, bool DelSplit)
 		}
 	}
 }
+
+wxf_str &wxf_str::assign_addend( const char *str,const char ch )
+{
+	size_t iLen;
+	iLen = strlen(str);
+	assign(str,iLen);
+	if (str[iLen-1] != ch)
+	{
+		append(&ch,1);
+	}
+	return *this;
+}
+
+wxf_str &wxf_str::assign_delend( const char *str,const char ch )
+{
+	size_t iLen;
+	iLen = strlen(str);
+	assign(str,iLen-1);
+	if (str[iLen-1] != ch)
+	{
+		append(&ch,1);
+	}
+	return *this;
+}
