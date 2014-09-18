@@ -20,5 +20,6 @@ using namespace libZPlay;
 #include "wxf_listitem.h"
 #include "wxf_playlist.h"
 #include "wxf_playctl.h"
+#include "wxf_setting.h"
 
 
