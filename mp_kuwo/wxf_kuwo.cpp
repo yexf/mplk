@@ -10,12 +10,20 @@ wxf_kuwo::~wxf_kuwo(void)
 }
 void wxf_kuwo::DeInit()
 {
+	wxf_setting &oSetting = wxf_setting::get_instance();
+
+
+	int iPlayNo = m_playlist->get_play();
+	oSetting.m_iPlayNo.format("%d",iPlayNo);
+	m_log->Add("保持设置");
+	oSetting.SaveSetting();
+	m_log->Add("保持设置成功");
 	m_use_timer = false;
 	m_pm.KillTimer(m_pRoot);
 	delete m_playctl;
 	delete m_playlist;
 	m_log->Add("关闭日志文件");
-	delete m_log;
+	delete m_log;	
 }
 void wxf_kuwo::Prepare()
 {
@@ -60,40 +68,38 @@ void wxf_kuwo::Prepare()
 void wxf_kuwo::Init()
 {
 	Prepare();
-
+	
 	CStdString t = (CStdString)m_pm.GetResourcePath();
 	m_respath = t.GetData();
 	t = (CStdString)m_pm.GetInstancePath();
 	m_inspath = t.GetData();
-	m_listpath = m_inspath + "playlist.txt";
-#ifdef SKIN_ZIP
-	wxf_str temp = m_inspath;
-#else
-	wxf_str temp = m_respath;
-#endif
 
+	wxf_setting &oSetting = wxf_setting::get_instance();
+
+	oSetting.SetRootDir(m_inspath+"run");
+	oSetting.LoadSetting();
+	m_listpath = oSetting.m_oPlayListPath;
+
+	wxf_str temp = m_respath;
 	temp = temp + "icon.ico";
-	if (wxf_pathfile_exist(temp) == 0)
+	if (wxf_pathfile_exist(temp.c_str()) == 0)
 	{
-		SetIcon(temp);
+		SetIcon(temp.c_str());
 	}
 
-
 	m_log = new wxf_log;
-	m_log->Open("kuwo.log");
+	
 
-#if _DEBUG
-	m_log->SetLogLevel(wxf_log::trace);
-#endif
-
-	m_log->SetLogPath(m_inspath);
-	m_log->Clear();
+	m_log->SetLogLevel(atoi(oSetting.m_oLogLevel.c_str()));
+	m_log->SetLogPath(oSetting.m_oLogDir.c_str());
+	m_log->Open(oSetting.m_oLogName.c_str());
 	m_log->Add("初始化日志文件");
 
 	m_playctl = new wxf_playctl(m_pPlayerProgress,m_log);
 	m_playlist = new wxf_playlist(m_pDefaultList);
 	//m_playctl->set_fftbk(&m_pm);
-	bool btemp = m_playlist->load_list(m_listpath);
+	bool btemp = m_playlist->load_list(m_listpath.c_str());
+	m_playlist->set_play(atoi(wxf_setting::get_instance().m_iPlayNo.c_str()));
 	if (btemp)	m_playctl->play(m_playlist);
 
 
@@ -106,7 +112,7 @@ void wxf_kuwo::Init()
 
 void wxf_kuwo::Close()
 {
-	m_playlist->save_list(m_listpath);
+	m_playlist->save_list(m_listpath.c_str());
 	SendMessage(WM_CLOSE, 0, 0);
 }
 
@@ -144,14 +150,14 @@ void wxf_kuwo::AddFile()
 	{
 		if (temp.size() == 1)
 		{
-			m_playlist->add_item(temp[0]);
+			m_playlist->add_item(temp[0].c_str());
 			m_playctl->play(m_playlist);
 		}
 		else
 		{
 			for (size_t i = 1; i < temp.size(); i++)
 			{
-				m_playlist->add_item(temp[i]);
+				m_playlist->add_item(temp[i].c_str());
 				m_playctl->play(m_playlist);
 			}
 		}
