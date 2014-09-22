@@ -277,3 +277,25 @@ wxf_str &wxf_str::assign_delend( const char *str,const char ch )
 	}
 	return *this;
 }
+
+wxf_str & wxf_str::term_end()
+{
+	while (data()[size()-1] == ' ' ||
+		data()[size()-1] == '\t' )
+	{
+		set_size(size()-1);
+	}
+	return *this;
+}
+
+wxf_str & wxf_str::term_begin()
+{
+	int pos = 0;
+	while (data()[pos] == ' ' ||
+		data()[pos] == '\t' )
+	{
+		pos++;
+	}
+	assign(data()+pos,size()-pos);
+	return *this;
+}

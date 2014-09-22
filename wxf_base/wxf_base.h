@@ -165,7 +165,7 @@ wxf_dirent_t win_readdir(wxf_dir_t dir);
 int win_entry_is_dir(wxf_dirent_t dirent);
 char* win_get_entry_name(void *dirent);
 unsigned int win_fsize(wxf_file_t fp);
-int win_fexist(const char *path);
+bool win_fexist(const char *path);
 
 //thread
 int wxf_thread_create(wxf_hdl *phandle, ulong *pid, wxf_thdrt routine, void *param);

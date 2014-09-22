@@ -283,6 +283,14 @@ public:
 	wxf_str &assign_addend(const char *str,const char ch);
 
 	wxf_str &assign_delend(const char *str,const char ch);
+
+	wxf_str &term_end();
+	wxf_str &term_begin();
+	wxf_str &term()
+	{
+		term_begin();
+		return term_end();
+	}
 };
 
 inline bool operator == (const wxf_str & a, const wxf_str & b)

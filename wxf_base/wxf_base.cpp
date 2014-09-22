@@ -117,7 +117,7 @@ unsigned int win_fsize(wxf_file_t fp)
 	fseek(fp, pos, SEEK_SET);
 	return size - temp;
 }
-int win_fexist(const char *path)
+bool win_fexist(const char *path)
 {
 	wxf_dir_t dir;
 	wxf_file_t fp;

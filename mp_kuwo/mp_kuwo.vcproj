@@ -46,6 +46,7 @@
 				RuntimeLibrary="3"
 				WarningLevel="3"
 				DebugInformationFormat="4"
+				DisableSpecificWarnings="4996"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -181,6 +182,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\wxf_mp3st.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\wxf_playctl.cpp"
 				>
 			</File>
@@ -216,6 +221,10 @@
 			</File>
 			<File
 				RelativePath=".\wxf_listitem.h"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_mp3st.h"
 				>
 			</File>
 			<File

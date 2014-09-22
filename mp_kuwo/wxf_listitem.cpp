@@ -1,5 +1,5 @@
 #include "pch.h"
-
+#include "wxf_mp3st.h"
 
 wxf_listitem::wxf_listitem(void)
 {
@@ -97,14 +97,26 @@ int wxf_listitem::set_no(int no)
 int wxf_listitem::set_file(const char *file_name)
 {
 	m_path = file_name;
-	wxf_str temp(file_name);
+	wxf_str oTemp;
+	wxf_id3v1 oID3V1;
+	if (wxf_get_id3v1(file_name,&oID3V1))
+	{
+		oTemp.assign(oID3V1.Author,sizeof(oID3V1.Author));
+		m_singername->SetText(oTemp.term().c_str());
+		oTemp.assign(oID3V1.SongName,sizeof(oID3V1.SongName));
+		m_songname->SetText(oTemp.term().c_str());
+	}
+	else
+	{
+		wxf_str temp(file_name);
 
-	temp = temp.split_last('\\');
-	m_singername->SetText(temp.split_last('-', false).c_str());
+		temp = temp.split_last('\\');
+		m_singername->SetText(temp.split_last('-', false).c_str());
 
-	temp = temp.split_last('-');
-	m_songname->SetText(temp.split_last('.', false).c_str());
-	
+		temp = temp.split_last('-');
+		m_songname->SetText(temp.split_last('.', false).c_str());
+		
+	}
 	return wxf_succ;
 }
 int wxf_listitem::add_to(CListUI *plist)
