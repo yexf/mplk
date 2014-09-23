@@ -16,7 +16,7 @@ bool wxf_get_id3v1(const char *filename, wxf_id3v1 *pID3v1)
 	bool bRet = false;
 	wxf_file_t fp;
 	uint32 size;
-
+	return false;
 	fp = wxf_fopen(filename,WXF_OM_READ);
 	if (fp == WXF_ERR_FILE)
 	{
