@@ -315,18 +315,18 @@ int wxf_player::draw_fft(HWND hWnd,int nX,int nY,int nWidth,int nHeight)
 	return ret;
 }
 
-int wxf_player::LoadID3(const char *filename,TID3Info &id3_info)
-{
-	if (g_player == NULL)
-	{
-		wxf_memset(&id3_info,0,sizeof(id3_info));
-		return wxf_err;
-	}
-	else
-	{
-		return g_player->loadid3(filename,id3_info);
-	}
-}
+//int wxf_player::LoadID3(const char *filename,TID3Info &id3_info)
+//{
+//	if (g_player == NULL)
+//	{
+//		wxf_memset(&id3_info,0,sizeof(id3_info));
+//		return wxf_err;
+//	}
+//	else
+//	{
+//		return g_player->loadid3(filename,id3_info);
+//	}
+//}
 void wxf_player::init(void)
 {
 	int ret = 0;
@@ -395,26 +395,26 @@ void wxf_player::deinit(void)
 	m_state = EM_DEINIT;
 	::DeleteObject(m_hfftbk);
 }
-int wxf_player::loadid3(const char *filename,TID3Info &id3_info)
-{
-	int ret = 0;
-
-	if (wxf_pathfile_exist(filename))
-	{
-		wxf_str temp;
-		temp.format("文件%s 不存在",filename);
-		wxf_logout(ret,"loadid3",temp.data());
-	}
-
-	ret = m_player->LoadFileID3(filename,sfAutodetect,id3Version1,&id3_info);
-	if (ret == 0)
-	{
-		wxf_logout(ret,"play");
-		return wxf_err;
-	}
-
-	return wxf_succ;
-}
+//int wxf_player::loadid3(const char *filename,TID3Info &id3_info)
+//{
+//	int ret = 0;
+//
+//	if (wxf_pathfile_exist(filename))
+//	{
+//		wxf_str temp;
+//		temp.format("文件%s 不存在",filename);
+//		wxf_logout(ret,"loadid3",temp.data());
+//	}
+//
+//	ret = m_player->LoadFileID3(filename,sfAutodetect,id3Version1,&id3_info);
+//	if (ret == 0)
+//	{
+//		wxf_logout(ret,"play");
+//		return wxf_err;
+//	}
+//
+//	return wxf_succ;
+//}
 
 
 int __stdcall wxf_player::libzplay_hdl(void* instance,

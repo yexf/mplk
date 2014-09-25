@@ -52,12 +52,12 @@ public:
 
 	int draw_fft(HWND hWnd,int nX,int nY,int nWidth,int nHeight);
 
-	static int LoadID3(const char *filename,TID3Info &id3_info);
+	//static int LoadID3(const char *filename,TID3Info &id3_info);
 private:
 	void init();
 	void deinit();
 
-	int loadid3(const char *filename,TID3Info &id3_info);
+	//int loadid3(const char *filename,TID3Info &id3_info);
 
 	static int __stdcall libzplay_hdl(void* instance,
 		void *user_data, 

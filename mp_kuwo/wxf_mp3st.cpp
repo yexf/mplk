@@ -65,14 +65,10 @@ bool wxf_get_filedstring(id3_frame *frame, wxf_str &out, int index = 0)
 		textencode = id3_field_gettextencoding(field);
 
 		latin1 = id3_ucs4_latin1duplicate(ucs4);
-		wxf_str oTemp = (char*)latin1;
-		oTemp.term();
 
 		if (wxf_id3_isansi(latin1))
 		{
 			out = (char*)latin1;
-			out.term();
-			bRst = true;
 		}
 		else
 		{
@@ -80,13 +76,14 @@ bool wxf_get_filedstring(id3_frame *frame, wxf_str &out, int index = 0)
 			ansi = StringConvertor::Utf8ToAnsi((LPCSTR)utf8);
 
 			out = ansi;
-			out.term();
-			bRst = true;
 
 			StringConvertor::StringFree(ansi);
 			free(utf8);			
 		}
 		free(latin1);	
+
+		out.term();
+		bRst = true;
 	}
 	return bRst;
 }
