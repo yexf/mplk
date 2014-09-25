@@ -10,79 +10,130 @@
 ** Description:
 **************************************************************************************/ 
 #include "wxf_mp3st.h"
+#include "id3tag.h"
+#pragma comment(lib,"../lib/libid3tag.lib")
+#pragma comment(lib,"../lib/libz.lib")
+#pragma warning(disable:4996)
 
-bool wxf_get_id3v1(const char *filename, wxf_id3v1 *pID3v1)
+typedef id3_file *	id3_file_t;
+
+bool wxf_id3_isansi(id3_latin1_t *latin1)
 {
-	bool bRet = false;
-	wxf_file_t fp;
-	uint32 size;
-	return false;
-	fp = wxf_fopen(filename,WXF_OM_READ);
-	if (fp == WXF_ERR_FILE)
+	while (*latin1 != '\0')
 	{
-		printf("Can't Open File :%s\n",filename);
-	}
-	size = wxf_fsize(fp);
-
-	wxf_fseek(fp,-sizeof(wxf_id3v1),SEEK_END);
-	if (wxf_fread_succ(fp,pID3v1,sizeof(wxf_id3v1)))
-	{
-		if (wxf_memcmp(pID3v1->Tag,"TAG",3) == 0)
+		if (*latin1 == 0xb7)
 		{
-			bRet = true;
-		}		
+			return false;
+		}
+		else
+		{
+			latin1++;
+		}
 	}
-	wxf_fclose(fp);
-
-	return bRet;
+	return true;
 }
-void wxf_mf_deinit(wxf_mfst *pmfst)
+
+//////////////////////////////////////////////////////////////////////////
+//
+//
+bool wxf_get_filedstring(id3_frame *frame, wxf_str &out, int index = 0)
 {
-	if (pmfst != NULL)
+	union id3_field const *field;
+	id3_field_textencoding textencode;
+
+	unsigned int nstrings, i;
+	bool bRst = false;
+
+	field    = id3_frame_field(frame, 1);
+	nstrings = id3_field_getnstrings(field);
+
+	for (i = 0; i < nstrings; ++i) 			
 	{
-		wxf_free(pmfst->buf);
-		wxf_free(pmfst);
+		const id3_ucs4_t *ucs4;
+		id3_utf8_t *utf8;
+		id3_latin1_t *latin1;
+		LPSTR ansi = NULL;
+
+		if (i != index)
+		{
+			continue;
+		}
+
+		ucs4 = id3_field_getstrings(field, i);
+		assert(ucs4);
+		
+		textencode = id3_field_gettextencoding(field);
+
+		latin1 = id3_ucs4_latin1duplicate(ucs4);
+		wxf_str oTemp = (char*)latin1;
+		oTemp.term();
+
+		if (wxf_id3_isansi(latin1))
+		{
+			out = (char*)latin1;
+			out.term();
+			bRst = true;
+		}
+		else
+		{
+			utf8 = id3_ucs4_utf8duplicate(ucs4);
+			ansi = StringConvertor::Utf8ToAnsi((LPCSTR)utf8);
+
+			out = ansi;
+			out.term();
+			bRst = true;
+
+			StringConvertor::StringFree(ansi);
+			free(utf8);			
+		}
+		free(latin1);	
 	}
+	return bRst;
 }
-wxf_mfst *wxf_mf_parse(const char *filename)
+
+bool wxf_get_filed(id3_tag *tag, const char *id, wxf_str &out, int index = 0)
 {
-	wxf_mfst *ret = NULL;
-	wxf_file_t fp;
-	int temp;
-	uint32 size;
+	id3_frame *frame;
+	unsigned int i;
 
-	fp = wxf_fopen(filename,WXF_OM_READ);
-	if (fp == WXF_ERR_FILE)
+	for (i = 0;i < tag->nframes;i++)
 	{
-		printf("Can't Open File :%s\n",filename);
+		frame = id3_tag_findframe(tag, NULL, i);
+		if (frame == NULL)
+		{
+			continue;
+		}
+		if (strcmp(id,frame->id) == 0)
+		{
+			return wxf_get_filedstring(frame,out,index);
+		}
 	}
-	size = wxf_fsize(fp);
-	temp = sizeof(wxf_mfst);
-	ret = (wxf_mfst *)wxf_malloc(temp);
-	wxf_assert(ret);
-	wxf_memset(ret,0,temp);
+	return false;
+}
 
-	ret->fd_len = size;
-	ret->buf = (uint8 *)wxf_malloc(size);
-	wxf_assert(ret->buf);
-	wxf_fread(ret->buf,1,size,fp);
-	wxf_fclose(fp);
+bool wxf_get_id3(const char *filename, wxf_id3 &oid3)
+{
+	id3_tag *tag;
+	id3_file_t pID3File;
 
-	ret->mih2 = (wxf_mih2 *)ret->buf;
-	if (wxf_memcmp(ret->mih2->Tag,"ID3",3))
+	pID3File = id3_file_open(filename, ID3_FILE_MODE_READONLY);
+	if (pID3File == NULL)
 	{
-		ret->mih2 = NULL;
-		size = 0;
+		return false;
 	}
-	else
-	{
-		size = (ret->mih2->Size[0] & 0x7f) << 21;
-		size += (ret->mih2->Size[1] & 0x7f) << 14;
-		size += (ret->mih2->Size[2] & 0x7f) << 7;
-		size += (ret->mih2->Size[3] & 0x7f);
-		ret->id3v2_len = size;
-	}
-	ret->mfh = (wxf_mfh *)(ret->buf + size - 10);
 
-	return ret;
+	tag = id3_file_tag(pID3File);
+	if (tag != NULL)
+	{
+		wxf_get_filed(tag,ID3_FRAME_TITLE,oid3.m_strTitle);
+		wxf_get_filed(tag,ID3_FRAME_ARTIST,oid3.m_strArtist);
+	}
+
+	id3_file_close(pID3File);
+
+	if (oid3.m_strTitle != "" && oid3.m_strArtist != "")
+	{
+		return true;
+	}
+	return false;
 }

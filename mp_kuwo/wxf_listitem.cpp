@@ -61,7 +61,7 @@ void wxf_listitem::init(void)
 	m_item->Add(m_phl);
 	m_item->SetAttribute("height","23");
 
-	m_listno->SetAttribute("width","20");
+	m_listno->SetAttribute("width","30");
 	m_singername->SetAttribute("width","64");
 	m_mvflag->SetAttribute("width","20");
 	m_nop->SetAttribute("width","4");
@@ -88,7 +88,7 @@ int wxf_listitem::set_no(int no)
 	m_no = no;
 
 	wxf_str temp;
-	temp.format("%d",no+1);
+	temp.format(" %d.",no+1);
 
 	m_listno->SetText(temp.data());
 	m_item->SetTag(no);
@@ -96,25 +96,27 @@ int wxf_listitem::set_no(int no)
 }
 int wxf_listitem::set_file(const char *file_name)
 {
-	m_path = file_name;
 	wxf_str oTemp;
-	wxf_id3v1 oID3V1;
-	if (wxf_get_id3v1(file_name,&oID3V1))
+	wxf_id3 oItem;
+
+	m_path = file_name;
+
+	if (wxf_get_id3(file_name, oItem))
 	{
-		oTemp.assign(oID3V1.Author,sizeof(oID3V1.Author));
-		m_singername->SetText(oTemp.term().c_str());
-		oTemp.assign(oID3V1.SongName,sizeof(oID3V1.SongName));
-		m_songname->SetText(oTemp.term().c_str());
+		m_singername->SetText(oItem.m_strArtist.c_str());
+		m_songname->SetText(oItem.m_strTitle.c_str());
 	}
 	else
 	{
-		wxf_str temp(file_name);
+		/*wxf_str temp(file_name);
 
 		temp = temp.split_last('\\');
 		m_singername->SetText(temp.split_last('-', false).c_str());
 
 		temp = temp.split_last('-');
-		m_songname->SetText(temp.split_last('.', false).c_str());
+		m_songname->SetText(temp.split_last('.', false).c_str());*/
+		m_singername->SetText("(未知的艺术家)");
+		m_songname->SetText("(未知的标题)");
 		
 	}
 	return wxf_succ;
