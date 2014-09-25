@@ -16,7 +16,8 @@
 #pragma warning(disable:4996)
 
 typedef id3_file *	id3_file_t;
-
+//////////////////////////////////////////////////////////////////////////
+//
 bool wxf_id3_isansi(id3_latin1_t *latin1)
 {
 	int len = strlen((char*)latin1);
