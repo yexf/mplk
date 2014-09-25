@@ -111,6 +111,7 @@ int wxf_playctl::over(wxf_playlist *plist)
 
 	ret = play(m_player,pitem->get_file());
 	plist->select_item(pitem);
+	plist->set_play(pitem->get_no());
 	m_bplay = true;
 	return ret;
 }
@@ -137,6 +138,7 @@ int wxf_playctl::pre(wxf_playlist *plist)
 
 	ret = play(m_player,pitem->get_file());
 	plist->select_item(pitem);
+	plist->set_play(pitem->get_no());
 	m_bplay = true;
 
 	return ret;
@@ -152,6 +154,7 @@ int wxf_playctl::next(wxf_playlist *plist)
 
 	ret = play(m_player,pitem->get_file());
 	plist->select_item(pitem);
+	plist->set_play(pitem->get_no());
 	m_bplay = true;
 
 	return ret;

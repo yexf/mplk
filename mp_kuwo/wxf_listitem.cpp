@@ -82,6 +82,9 @@ void wxf_listitem::init(void)
 	m_songname->SetAttribute("textcolor","#7f1f1f1f");
 	m_singername->SetAttribute("textcolor","#7f1f1f1f");
 
+	m_defBKColor = m_item->GetBkColor();
+	m_PlayBKColor = 0x7f4f4f4f;
+
 }
 int wxf_listitem::set_no(int no)
 {
@@ -130,4 +133,23 @@ int wxf_listitem::remove_form(CListUI *plist)
 {
 	plist->Remove(m_item);
 	return wxf_succ;
+}
+
+void wxf_listitem::set_play( bool IsPlay )
+{
+	if (IsPlay)
+	{
+		m_listno->SetFont(13);
+		m_singername->SetFont(13);
+		m_songname->SetFont(13);
+		m_item->SetBkColor(m_PlayBKColor);
+		
+	}
+	else
+	{
+		m_listno->SetFont(14);
+		m_singername->SetFont(14);
+		m_songname->SetFont(14);
+		m_item->SetBkColor(m_defBKColor);
+	}
 }

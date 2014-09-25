@@ -28,9 +28,10 @@ public:
 	void set_log(wxf_log *log) {m_log = log;}
 
 	void set_select(int no) {m_nselect = no;}
-	void set_play(int no){m_nplay = no;}
+	
 	int get_select(void) {return m_nselect;}
 	int get_play(void) {return m_nplay;}
+	void set_play(int no);
 
 	wxf_listitem *get_pcur(void);
 	wxf_listitem *get_next(void);

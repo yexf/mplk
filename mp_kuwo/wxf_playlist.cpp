@@ -20,10 +20,7 @@ wxf_listitem *wxf_playlist::get_next(void)
 	
 	pitem = find_item(m_nplay);
 	pitem = get_next(pitem);
-	if (pitem)
-	{
-		m_nplay = pitem->get_no();
-	}	
+	
 	return pitem;
 }
 wxf_listitem *wxf_playlist::get_pre(wxf_listitem *pitem)
@@ -83,7 +80,6 @@ void wxf_playlist::select_item(wxf_listitem *pitem)
 	{
 		no = pitem->get_no();
 		m_plist->SelectItem(no);
-		m_nplay = no;
 	}
 }
 wxf_listitem *wxf_playlist::find_item(int no)
@@ -241,4 +237,19 @@ void wxf_playlist::push_item(wxf_listitem *pitem)
 	}
 
 	pitem->add_to(m_plist);
+}
+
+void wxf_playlist::set_play(int no)
+{
+	if (m_nplay == no)
+	{
+		return ;
+	}
+	if (m_nplay != -1)
+	{
+		find_item(m_nplay)->set_play(false);
+	}
+	
+	m_nplay = no;
+	find_item(m_nplay)->set_play(true);
 }

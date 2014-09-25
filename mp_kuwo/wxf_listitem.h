@@ -24,6 +24,8 @@ public:
 
 	void set_next(wxf_listitem *next) {m_next = next;}
 	wxf_listitem *get_next(){return m_next;}
+
+	void set_play(bool IsPlay);
 public:
 	int add_to(CListUI *plist);
 	int remove_form(CListUI *plist);
@@ -48,6 +50,8 @@ private:
 	int m_no;
 	wxf_str m_path;
 	TID3Info m_id3;	
+	DWORD m_defBKColor;
+	DWORD m_PlayBKColor;
 
 	wxf_listitem *m_next;
 };
