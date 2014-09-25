@@ -19,18 +19,29 @@ typedef id3_file *	id3_file_t;
 
 bool wxf_id3_isansi(id3_latin1_t *latin1)
 {
+	int len = strlen((char*)latin1);
+	int cnt1 = 0,cnt2 = 0;
 	while (*latin1 != '\0')
 	{
+		if (*latin1 < 0x80)
+		{
+			cnt1++;
+		}
 		if (*latin1 == 0xb7)
 		{
-			return false;
+			cnt2++;
 		}
-		else
-		{
-			latin1++;
-		}
+		
+		latin1++;
 	}
-	return true;
+	if (cnt2 == 0 || cnt1 + cnt2 < len)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}	
 }
 
 //////////////////////////////////////////////////////////////////////////
