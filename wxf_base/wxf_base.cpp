@@ -588,6 +588,74 @@ int wxf_msg_box(const char *fmt,...)
 
 	return nMaxLen;
 }
+
+
+
+unsigned int wxf_countgbk(const char * str)  
+{  
+	assert(str != NULL);  
+	unsigned int len = (unsigned int)strlen (str);  
+	unsigned int counter = 0;  
+	unsigned char head = 0x80;  
+	unsigned char firstChar, secondChar;  
+
+	for (unsigned int i = 0; i < len - 1; ++i)  
+	{  
+		firstChar = (unsigned char)str[i];  
+		if (!(firstChar & head))continue;  
+		secondChar = (unsigned char)str[i];  
+		if (firstChar >= 161 && firstChar <= 247 && secondChar>=161 && secondChar <= 254)  
+		{  
+			counter+= 2;  
+			++i;  
+		}  
+	}  
+	return counter;  
+}  
+
+unsigned int wxf_countutf8(const char * str)  
+{  
+	assert(str != NULL);  
+	unsigned int len = (unsigned int)strlen (str);  
+	unsigned int counter = 0;  
+	unsigned char head = 0x80;  
+	unsigned char firstChar;  
+	for (unsigned int i = 0; i < len; ++i)  
+	{  
+		firstChar = (unsigned char)str[i];  
+		if (!(firstChar & head))continue;  
+		unsigned char tmpHead = head;  
+		unsigned int wordLen = 0 , tPos = 0;  
+		while (firstChar & tmpHead)  
+		{  
+			++ wordLen;  
+			tmpHead >>= 1;  
+		}  
+		if (wordLen <= 1)continue; //utf8最小长度为2  
+		wordLen --;  
+		if (wordLen + i >= len)break;  
+		for (tPos = 1; tPos <= wordLen; ++tPos)  
+		{  
+			unsigned char secondChar = (unsigned char)str[i + tPos];  
+			if (!(secondChar & head))break;  
+		}  
+		if (tPos > wordLen)  
+		{  
+			counter += wordLen + 1;  
+			i += wordLen;  
+		}  
+	}  
+	return counter;  
+}  
+
+bool wxf_isutf8(const char *str)  
+{  
+	unsigned int iGBK = wxf_countgbk(str);  
+	unsigned int iUTF8= wxf_countutf8(str);  
+	if (iUTF8 > iGBK)return true;  
+	return false;  
+}
+
 #endif//OS_WINDOW
 
 
@@ -1027,3 +1095,117 @@ bool GetFileExFileName(const string& pSrcFileName,string& strExtName)
 }
 
 #endif
+
+
+
+
+
+#ifdef WIN32
+
+/***************************************************
+* Function:       IsUTF8
+* Description:    判断是否utf-8编码字符
+* Input:          pzInfo:要判断的字符
+* Output:         
+* Return:         
+* Others:         
+***************************************************/
+bool IsUTF8(const char * pzInfo)
+{
+	int nWSize = MultiByteToWideChar(CP_UTF8,
+		MB_ERR_INVALID_CHARS,pzInfo,-1,NULL,0 );
+	int error = GetLastError();
+	if (error == ERROR_NO_UNICODE_TRANSLATION)
+	{
+		return false;
+	}
+	//判断是否是gb2312,只要把CP_UTF8用936代替即可.
+
+	return true;
+}
+
+/***************************************************
+* Function:       IsGB2312
+* Description:    判断是否gb2312编码字符
+* Input:          pzInfo:待判断字符
+* Output:         
+* Return:         
+* Others:         
+***************************************************/
+bool IsGB2312(const char *pzInfo )
+{
+	int nWSize = MultiByteToWideChar(936,MB_ERR_INVALID_CHARS,pzInfo,-1,NULL,0 );
+	int error = GetLastError();
+	if (error == ERROR_NO_UNICODE_TRANSLATION)
+	{
+		return false;
+	}
+	//判断是否是CP_UTF8,只要把936用CP_UTF8代替即可.
+
+	return true;
+}
+
+#endif
+
+/***************************************************
+* Function:       IsGB
+* Description:    是否gb2312
+* Input:          pText：待判断字符
+* Output:         
+* Return:         
+* Others:         
+***************************************************/
+int IsGB(char *pText)
+{
+	unsigned char *sqChar = (unsigned char *)pText;
+	if (sqChar[0] >= 0xa1)
+	{
+		if (sqChar[0] == 0xa3)
+		{
+			return 1;//全角字符
+		}
+		else
+		{
+			return 2;//汉字
+		}
+	}
+	else
+	{
+		return 0;//英文、数字、英文标点
+	}
+}
+
+
+/***************************************************
+* Function:       IsChinese
+* Description:    是否有中文
+* Input:          pzInfo：待判断字符
+* Output:         
+* Return:         
+* Others:         
+***************************************************/
+bool IsChinese(const char *pzInfo)
+{
+	int i;
+	char *pText = (char*)pzInfo;
+	while (*pText != '/0')
+	{
+		i = IsGB(pText);
+		switch(i)
+		{
+		case 0:
+			pText++;
+			break;
+		case 1:
+			pText++;
+			pText++;
+			break;
+		case 2:
+			pText++;
+			pText++;
+			return true;
+		break;
+		}
+	}
+	return false;
+}

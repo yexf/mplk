@@ -39,6 +39,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/wd4996"
 				Optimization="0"
 				PreprocessorDefinitions="WXF_LIB;OS_WINDOWS"
 				MinimalRebuild="true"
@@ -163,6 +164,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\wxf_icov.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\wxf_lock.cpp"
 				>
 			</File>
@@ -190,6 +195,10 @@
 			</File>
 			<File
 				RelativePath=".\wxf_file.h"
+				>
+			</File>
+			<File
+				RelativePath=".\wxf_icov.h"
 				>
 			</File>
 			<File

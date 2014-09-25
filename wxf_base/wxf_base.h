@@ -204,10 +204,17 @@ int wxf_get_file_size(const char *file_name);
 int wxf_create_local_dir(char *szPath);
 int wxf_msg_box(const char *fmt,...);
 
+bool wxf_isutf8(const char *str); 
+bool IsUTF8(const char * pzInfo);
+bool IsGB2312(const char *pzInfo );
+int IsGB(char *pText);
+bool IsChinese(const char *pzInfo);
+
 #include "wxf_str.h"
 #include "wxf_lock.h"
 #include "wxf_file.h"
 #include "wxf_log.h"
+#include "wxf_icov.h"
 
 #ifndef WXF_LIB
 #pragma comment(lib,"../lib/wxf_base.lib")
