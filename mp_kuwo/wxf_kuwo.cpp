@@ -99,9 +99,11 @@ void wxf_kuwo::Init()
 	m_playlist = new wxf_playlist(m_pDefaultList);
 
 	bool btemp = m_playlist->load_list(m_listpath.c_str());
-	m_playlist->set_play(atoi(wxf_setting::get_instance().m_iPlayNo.c_str()));
-	//if (btemp)	m_playctl->play(m_playlist);
-
+	if (btemp)
+	{
+		m_playlist->set_play(atoi(wxf_setting::get_instance().m_iPlayNo.c_str()));
+		//m_playctl->play(m_playlist);
+	}
 
 	m_pPlayerProgress->SetMaxValue(1024);
 	m_pPlayerVolumn->SetMaxValue(100);
