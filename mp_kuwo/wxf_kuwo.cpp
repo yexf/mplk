@@ -97,7 +97,7 @@ void wxf_kuwo::Init()
 
 	m_playctl = new wxf_playctl(m_pPlayerProgress,m_log);
 	m_playlist = new wxf_playlist(m_pDefaultList);
-	//m_playctl->set_fftbk(&m_pm);
+
 	bool btemp = m_playlist->load_list(m_listpath.c_str());
 	m_playlist->set_play(atoi(wxf_setting::get_instance().m_iPlayNo.c_str()));
 	//if (btemp)	m_playctl->play(m_playlist);
@@ -107,7 +107,7 @@ void wxf_kuwo::Init()
 	m_pPlayerVolumn->SetMaxValue(100);
 	m_pPlayerProgress->SetValue(0);
 	m_pPlayerVolumn->SetValue(80);
-	//m_playlist->get_player()->set_vol(0.8);
+	m_playctl->set_vol(80, 100);
 }
 
 void wxf_kuwo::Close()
