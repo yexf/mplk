@@ -86,6 +86,8 @@ private:
 	wxf_playctl *m_playctl;
 
 	bool m_use_timer;
+	clock_t m_tRunTime;
+	int m_iDelayPlay;
 	
 	wxf_str m_respath;
 	wxf_str m_inspath;

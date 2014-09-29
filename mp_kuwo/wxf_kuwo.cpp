@@ -63,12 +63,15 @@ void wxf_kuwo::Prepare()
 	m_pLyric = static_cast<COptionUI*>(m_pm.FindControl(_T("lyric")));
 	m_pMV = static_cast<COptionUI*>(m_pm.FindControl(_T("mv")));
 
-	m_pm.SetTimer(m_pRoot,0,40);
 }
 void wxf_kuwo::Init()
 {
 	Prepare();
-	
+
+	m_tRunTime = 0;
+	m_iDelayPlay = -1;
+	m_pm.SetTimer(m_pRoot,0,40);
+
 	CStdString t = (CStdString)m_pm.GetResourcePath();
 	m_respath = t.GetData();
 	t = (CStdString)m_pm.GetInstancePath();
@@ -103,6 +106,7 @@ void wxf_kuwo::Init()
 	{
 		m_playlist->set_play(atoi(wxf_setting::get_instance().m_iPlayNo.c_str()));
 		//m_playctl->play(m_playlist);
+		m_iDelayPlay = 25;
 	}
 
 	m_pPlayerProgress->SetMaxValue(1024);
@@ -121,6 +125,9 @@ void wxf_kuwo::Close()
 void wxf_kuwo::Timer()
 {
 	int ret = wxf_succ;
+	
+	m_tRunTime = clock();
+
 	ret = m_playctl->over(m_playlist);
 	if (ret == wxf_succ)
 	{
@@ -139,6 +146,18 @@ void wxf_kuwo::Timer()
 		m_playctl->len_time(m_pPL_LBL_TotalTime);
 		m_playctl->cur_time(m_pPL_LBL_CurTime);
 		m_playctl->draw_fft(m_hWnd,m_nFFTPanel);
+	}
+	else
+	{
+		if (m_iDelayPlay != -1)
+		{
+			if (m_iDelayPlay == 0)
+			{
+				m_playctl->play(m_playlist);
+				m_iDelayPlay = -1;
+			}
+			m_iDelayPlay--;
+		}		
 	}
 }
 
