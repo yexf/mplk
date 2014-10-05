@@ -60,6 +60,7 @@ protected:
 	CHorizontalLayoutUI *m_pPlayControlPanel;
 	CSliderUI *m_pPlayerProgress;
 	CSliderUI *m_pPlayerVolumn;
+	CLabelUI *m_pMessageLable;
 
 	CButtonUI* m_pPre;
 	CButtonUI* m_pNext;

@@ -43,6 +43,7 @@ void wxf_kuwo::Prepare()
 	m_pPlayerProgress = static_cast<CSliderUI*>(m_pm.FindControl(_T("PlayerProgress")));
 	m_pPlayerVolumn = static_cast<CSliderUI*>(m_pm.FindControl(_T("PlayerVolumn")));
 	m_pPlayControlPanel = static_cast<CHorizontalLayoutUI *>(m_pm.FindControl(_T("PlayControlPanel")));
+	m_pMessageLable = static_cast<CLabelUI *>(m_pm.FindControl(_T("MessageLable")));
 
 	m_pPre = static_cast<CButtonUI*>(m_pm.FindControl(_T("Pre")));
 	m_pNext = static_cast<CButtonUI*>(m_pm.FindControl(_T("Next")));	
@@ -63,6 +64,7 @@ void wxf_kuwo::Prepare()
 	m_pLyric = static_cast<COptionUI*>(m_pm.FindControl(_T("lyric")));
 	m_pMV = static_cast<COptionUI*>(m_pm.FindControl(_T("mv")));
 
+	m_pm.SetTimer(m_pRoot,0,40);
 }
 void wxf_kuwo::Init()
 {
@@ -70,8 +72,8 @@ void wxf_kuwo::Init()
 
 	m_tRunTime = 0;
 	m_iDelayPlay = -1;
-	m_pm.SetTimer(m_pRoot,0,40);
 
+	
 	CStdString t = (CStdString)m_pm.GetResourcePath();
 	m_respath = t.GetData();
 	t = (CStdString)m_pm.GetInstancePath();
@@ -125,9 +127,7 @@ void wxf_kuwo::Close()
 void wxf_kuwo::Timer()
 {
 	int ret = wxf_succ;
-	
 	m_tRunTime = clock();
-
 	ret = m_playctl->over(m_playlist);
 	if (ret == wxf_succ)
 	{
@@ -143,6 +143,7 @@ void wxf_kuwo::Timer()
 		{
 			m_pPlayerProgress->SetValue(temp);
 		}
+		m_pMessageLable->SetText(m_playlist->get_pcur()->get_file());
 		m_playctl->len_time(m_pPL_LBL_TotalTime);
 		m_playctl->cur_time(m_pPL_LBL_CurTime);
 		m_playctl->draw_fft(m_hWnd,m_nFFTPanel);
