@@ -21,7 +21,8 @@ private:
 		:m_strVersion("0.01"),
 		m_oFileName("mp_kuwo_setting.xml"),m_oRootDir(".\\"),
 		m_oPlayListPath("playlist.txt"),m_iPlayNo(0),
-		m_oLogDir(".\\"),m_oLogName("kuwo.log"),m_oLogLevel("3")
+		m_oLogDir(".\\"),m_oLogName("kuwo.log"),m_oLogLevel("3"),
+		m_oLoopMode("0")
 	{
 		
 	}
@@ -42,6 +43,8 @@ public:
 	wxf_str &GetPlayList();
 	void SetPlayList(wxf_str &strPlayList);
 
+	int GetLoopMode();
+	void SetLoopMode(int mode);
 public:
 	static wxf_setting &get_instance() {return g_setting;}
 	static const wxf_setting &get_const_instance() {return g_setting;}
@@ -59,4 +62,6 @@ public:
 	wxf_str m_oLogName;
 	wxf_str m_oLogLevel;
 	wxf_str m_oLogDir;
+
+	wxf_str m_oLoopMode;
 };

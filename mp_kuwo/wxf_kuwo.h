@@ -109,6 +109,8 @@ private:
 	void PlayCtrl(CControlUI *psender);
 	void ValueChange(CControlUI *psender);
 	void LyricChange(CControlUI *psender);
+
+	void OrderChange(CControlUI *psender);
 private:
 	inline void wxf_logout(int ret,const char *inf,char *msg)
 	{

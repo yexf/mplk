@@ -19,6 +19,7 @@ bool wxf_setting::LoadSetting()
 	wxf_node *pLogName = pRoot->FirstChild("logname");
 	wxf_node *pLogLevel = pRoot->FirstChild("loglevel");
 	wxf_node *pLogDir = pRoot->FirstChild("logdir");
+	wxf_node *pLoopMode = pRoot->FirstChild("loopmode");
 
 	m_oPlayListPath = pFilePath->FirstChild()->Value();
 	m_iPlayNo = pPlayNo->FirstChild()->Value();
@@ -26,7 +27,11 @@ bool wxf_setting::LoadSetting()
 	m_oLogName = pLogName->FirstChild()->Value();
 	m_oLogLevel = pLogLevel->FirstChild()->Value();
 	m_oLogDir = pLogDir->FirstChild()->Value();
-
+	
+	if (pLoopMode)
+	{
+		m_oLoopMode = pLoopMode->FirstChild()->Value();
+	}
 	return true;
 }
 
@@ -62,6 +67,10 @@ bool wxf_setting::SaveSetting()
 
 	oText->SetValue(m_oLogDir.c_str());
 	oTemp.SetValue("logdir");
+	oRoot.InsertEndChild(oTemp);
+
+	oText->SetValue(m_oLoopMode.c_str());
+	oTemp.SetValue("loopmode");
 	oRoot.InsertEndChild(oTemp);
 
 	oDoc.InsertEndChild(oRoot);
@@ -103,4 +112,14 @@ wxf_str wxf_setting::GetSettingFile()
 void wxf_setting::SetSettingFile( wxf_str &strSettingFile )
 {
 	m_oFileName = strSettingFile;
+}
+
+int wxf_setting::GetLoopMode()
+{
+	return atoi(m_oLoopMode.c_str());
+}
+
+void wxf_setting::SetLoopMode( int mode )
+{
+	m_oLoopMode.format("%d",mode);
 }

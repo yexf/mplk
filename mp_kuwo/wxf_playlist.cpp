@@ -41,7 +41,7 @@ wxf_listitem *wxf_playlist::get_pre(wxf_listitem *pitem)
 	return pre;
 }
 wxf_listitem *wxf_playlist::get_next(wxf_listitem *pitem)
-{
+{	
 	if (pitem == NULL)return NULL;	
 	wxf_listitem *pnext = NULL;
 	int rnd = wxf_rand((int)pitem);
@@ -86,7 +86,6 @@ wxf_listitem *wxf_playlist::find_item(int no)
 {
 	wxf_listitem *temp;
 	temp = m_head;
-
 	while(temp != NULL)
 	{
 		if (no == temp->get_no())
@@ -252,4 +251,39 @@ void wxf_playlist::set_play(int no)
 	
 	m_nplay = no;
 	find_item(m_nplay)->set_play(true);
+}
+
+void wxf_playlist::set_order( int loopmode, CButtonUI *pOrder )
+{
+	wxf_str filename,tip;
+	m_loopmode = loopmode % EM_MODEMAX;
+	switch(m_loopmode)
+	{
+	case EM_LISTLOOP:
+		filename = "PlaylistBtnIcoModeCircle.png";
+		tip = "循环播放";
+		break;
+	case EM_LISTPLAY:
+		filename = "PlaylistBtnIcoModeOrder.png";
+		tip = "顺序播放";
+		break;
+	case EM_SONGLOOP:
+		filename = "PlaylistBtnIcoModeSingle.png";
+		tip = "单曲循环";
+		break;
+	case EM_RANDOMLOOP:
+		filename = "PlaylistBtnIcoModeRand.png";
+		tip = "随机播放";
+		break;
+	default:break;
+
+	}
+	wxf_str attr = "file='" + filename + "' dest='3,2,44,18'";
+	pOrder->SetBkImage(attr.c_str());
+	pOrder->SetToolTip(tip.c_str());
+}
+
+int wxf_playlist::get_order()
+{
+	return m_loopmode;
 }

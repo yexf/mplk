@@ -18,7 +18,7 @@ class wxf_lock
 {
 public:
 	//构造函数
-	wxf_lock();
+	wxf_lock(bool bInit = true);
 
 	//析构函数
 	~wxf_lock();

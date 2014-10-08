@@ -151,7 +151,10 @@ int wxf_playctl::next(wxf_playlist *plist)
 	m_bplay = false;
 	wxf_listitem *pitem;
 	pitem = plist->get_next();
-
+	if (pitem == NULL)
+	{
+		return wxf_err;
+	}
 	ret = play(m_player,pitem->get_file());
 	plist->select_item(pitem);
 	plist->set_play(pitem->get_no());

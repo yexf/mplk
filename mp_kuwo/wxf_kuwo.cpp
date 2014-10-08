@@ -16,6 +16,8 @@ void wxf_kuwo::DeInit()
 	int iPlayNo = m_playlist->get_play();
 	oSetting.m_iPlayNo.format("%d",iPlayNo);
 	m_log->Add("保持设置");
+
+	oSetting.SetLoopMode(m_playlist->get_order());
 	oSetting.SaveSetting();
 	m_log->Add("保持设置成功");
 	m_use_timer = false;
@@ -102,6 +104,11 @@ void wxf_kuwo::Init()
 
 	m_playctl = new wxf_playctl(m_pPlayerProgress,m_log);
 	m_playlist = new wxf_playlist(m_pDefaultList);
+
+	if (m_playlist != NULL)
+	{
+		m_playlist->set_order(oSetting.GetLoopMode(),m_pOrder);
+	}
 
 	bool btemp = m_playlist->load_list(m_listpath.c_str());
 	if (btemp)
@@ -237,7 +244,14 @@ void wxf_kuwo::PlayCtrl(CControlUI *psender)
 	}
 	else if( psender == m_pNext ) 
 	{
-		m_playctl->next(m_playlist);
+		int ret = m_playctl->next(m_playlist);
+
+		if (ret == wxf_err)
+		{
+			//wxf_msg_box("下一曲错误");
+			m_playlist->set_play(0);
+			m_playctl->next(m_playlist);
+		}
 	}
 	
 }
@@ -318,7 +332,8 @@ void wxf_kuwo::Notify(TNotifyUI& msg)
 			PlayCtrl(msg.pSender);
 		else if( msg.pSender == m_pNext ) 
 			PlayCtrl(msg.pSender);
-		
+		else if( msg.pSender == m_pOrder )
+			OrderChange(msg.pSender);
 
 		else if( msg.pSender == m_pMinBtn ) { 
 			SendMessage(WM_SYSCOMMAND, SC_MINIMIZE, 0); return; }
@@ -544,5 +559,12 @@ LRESULT wxf_kuwo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	if( m_pm.MessageHandler(uMsg, wParam, lParam, lRes) ) return lRes;
 	return CWindowWnd::HandleMessage(uMsg, wParam, lParam);
 }
+
+void wxf_kuwo::OrderChange( CControlUI *psender )
+{
+	int mode = m_playlist->get_order();
+	m_playlist->set_order(mode+1,m_pOrder);
+}
+
 #endif
 

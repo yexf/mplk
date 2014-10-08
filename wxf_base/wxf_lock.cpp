@@ -15,10 +15,14 @@
  参    数 : 
             char * phost : 标志是那个模块在使用该互斥体 
 *************************************************************/
-wxf_lock::wxf_lock()
+wxf_lock::wxf_lock(bool bInit)
 {
 	wxf_memset(ch_host,0,WXF_MAX_NAME);
 	bInit = false;
+	if (bInit)
+	{
+		init(NULL);
+	}
 }
 
 /*************************************************************

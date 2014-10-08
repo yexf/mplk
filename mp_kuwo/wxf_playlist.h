@@ -15,10 +15,11 @@ class wxf_playlist
 public:
 	enum loop_mode
 	{
-		EM_LISTLOOP,				//列表循环
+		EM_LISTLOOP = 0,			//列表循环
 		EM_LISTPLAY,				//列表播放
 		EM_SONGLOOP,				//单曲循环
-		EM_RANDOMLOOP				//随机循环
+		EM_RANDOMLOOP,				//随机循环
+		EM_MODEMAX
 	};
 public:
 	wxf_playlist(CListUI *plist):m_plist(plist),m_log(NULL){init();}
@@ -48,6 +49,9 @@ public:
 
 	void save_list(const char *file_name);
 	bool load_list(const char *file_name);
+
+	int get_order();
+	void set_order(int loopmode, CButtonUI *pOrder);
 protected:
 	CListUI *m_plist;
 private:
@@ -56,10 +60,11 @@ private:
 	int m_nplay;
 	int m_nselect;
 
-	loop_mode m_loopmode;
+	int m_loopmode;
 	int m_itemnum;
 
 	wxf_log	*m_log;
+	
 private:
 	void init();
 	void deinit();
