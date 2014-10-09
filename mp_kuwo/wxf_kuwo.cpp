@@ -577,7 +577,7 @@ void wxf_kuwo::OrderChange( CControlUI *psender )
 
 void wxf_kuwo::ListChange( CControlUI *psender )
 {
-	bool bRst = false;
+	/*bool bRst = false;
 	if (psender == m_pDefaultListBtn)
 	{
 		bRst = m_playlist->change_list(false);
@@ -589,7 +589,7 @@ void wxf_kuwo::ListChange( CControlUI *psender )
 	if (bRst)
 	{
 		PlayCtrl(0);	
-	}
+	}*/
 }
 
 #endif
