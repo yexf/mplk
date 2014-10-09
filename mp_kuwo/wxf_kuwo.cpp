@@ -161,7 +161,8 @@ void wxf_kuwo::Timer()
 		{
 			if (m_iDelayPlay == 0)
 			{
-				m_playctl->play(m_playlist);
+				//m_playctl->play(m_playlist);
+				PlayCtrl(m_pPlay);
 				m_iDelayPlay = -1;
 			}
 			m_iDelayPlay--;
