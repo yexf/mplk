@@ -66,6 +66,9 @@ void wxf_kuwo::Prepare()
 	m_pLyric = static_cast<COptionUI*>(m_pm.FindControl(_T("lyric")));
 	m_pMV = static_cast<COptionUI*>(m_pm.FindControl(_T("mv")));
 
+	m_pDefaultListBtn = static_cast<COptionUI*>(m_pm.FindControl(_T("DefaultListBtn")));
+	m_pClassListBtn = static_cast<COptionUI*>(m_pm.FindControl(_T("ClassListBtn")));
+
 	m_pm.SetTimer(m_pRoot,0,40);
 }
 void wxf_kuwo::Init()
@@ -336,6 +339,10 @@ void wxf_kuwo::Notify(TNotifyUI& msg)
 			PlayCtrl(msg.pSender);
 		else if( msg.pSender == m_pOrder )
 			OrderChange(msg.pSender);
+		else if( msg.pSender == m_pDefaultListBtn ) 
+			ListChange(msg.pSender);
+		else if( msg.pSender == m_pClassListBtn )
+			ListChange(msg.pSender);
 
 		else if( msg.pSender == m_pMinBtn ) { 
 			SendMessage(WM_SYSCOMMAND, SC_MINIMIZE, 0); return; }
@@ -566,6 +573,23 @@ void wxf_kuwo::OrderChange( CControlUI *psender )
 {
 	int mode = m_playlist->get_order();
 	m_playlist->set_order(mode+1,m_pOrder);
+}
+
+void wxf_kuwo::ListChange( CControlUI *psender )
+{
+	bool bRst = false;
+	if (psender == m_pDefaultListBtn)
+	{
+		bRst = m_playlist->change_list(false);
+	}
+	else
+	{
+		bRst = m_playlist->change_list(true);
+	}
+	if (bRst)
+	{
+		PlayCtrl(0);	
+	}
 }
 
 #endif

@@ -10,6 +10,34 @@
 ** Description:播放列表 为播放控制器提供播放内容
 **************************************************************************************/ 
 #pragma once
+#include <vector>
+#include <string>
+#include <map>
+class wxf_filelist;
+struct wxf_fileitem
+{
+	std::string m_strFilePath;
+	bool m_bIsLikeMusic;
+	wxf_fileitem():m_strFilePath(""),m_bIsLikeMusic(false)
+	{
+	}
+	wxf_fileitem(std::string strFilePath,bool bIsLikeMusic = false)
+		:m_strFilePath(strFilePath),m_bIsLikeMusic(bIsLikeMusic)
+	{
+	}
+};
+typedef std::vector<wxf_fileitem> wxf_fileitemvec;
+class wxf_filemap
+{
+public:
+	bool LoadFile(const char *pstrFilePath);
+	bool SaveFile(const char *pstrFilePath);
+	wxf_fileitemvec &GetFileList(const char *pstrTitle = "default");
+	void SetFileList(wxf_fileitemvec &vecFileLit,const char *pstrTitle = "default");
+private:
+	std::map<std::string,wxf_filelist> m_mapFileMap;
+};
+
 class wxf_playlist
 {
 public:
@@ -22,7 +50,7 @@ public:
 		EM_MODEMAX
 	};
 public:
-	wxf_playlist(CListUI *plist):m_plist(plist),m_log(NULL){init();}
+	wxf_playlist(CListUI *plist):m_plist(plist),m_bIsFav(false),m_log(NULL){init();}
 	~wxf_playlist(void){deinit();}
 	
 public:
@@ -42,7 +70,7 @@ public:
 
 	void select_item(wxf_listitem *pitem);
 	wxf_listitem *find_item(int no);
-	int add_item(const char *file_name);
+	wxf_listitem *add_item(const char *file_name);
 
 	wxf_listitem *find_pre(int no);
 	int del_select();
@@ -54,16 +82,21 @@ public:
 	void set_order(int loopmode, CButtonUI *pOrder);
 
 	void click_item(int no,TNotifyUI *psender);
+	bool change_list(bool bIsFav);
 protected:
 	CListUI *m_plist;
 private:
 	wxf_listitem *m_head;
 	wxf_listitem *m_tail;
+
+	std::vector<wxf_listitem *> m_vecDisplay;
 	int m_nplay;
 	int m_nselect;
 
 	int m_loopmode;
 	int m_itemnum;
+
+	bool m_bIsFav;
 
 	wxf_log	*m_log;
 	

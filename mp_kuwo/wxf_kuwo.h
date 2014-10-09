@@ -81,6 +81,9 @@ protected:
 	COptionUI *m_pLyric;
 	COptionUI *m_pMV;
 
+	COptionUI *m_pDefaultListBtn;
+	COptionUI *m_pClassListBtn;
+
 private:	
 	wxf_log	*m_log;
 	wxf_playlist *m_playlist;
@@ -111,6 +114,7 @@ private:
 	void LyricChange(CControlUI *psender);
 
 	void OrderChange(CControlUI *psender);
+	void ListChange(CControlUI *psender);
 private:
 	inline void wxf_logout(int ret,const char *inf,char *msg)
 	{

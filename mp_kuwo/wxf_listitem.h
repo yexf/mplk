@@ -26,6 +26,7 @@ public:
 	wxf_listitem *get_next(){return m_next;}
 
 	void set_like(bool Islike);
+	bool get_like() {return m_bIsLike;}
 	void change_like();
 
 	void set_play(bool IsPlay);
@@ -37,9 +38,6 @@ private:
 	void init();
 	void deinit();
 	
-	
-
-
 private:
 	CLabelUI *m_listno;
 	CLabelUI *m_like;

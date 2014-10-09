@@ -97,15 +97,17 @@ wxf_listitem *wxf_playlist::find_item(int no)
 	return temp;
 }
 
-int wxf_playlist::add_item(const char *file_name)
+wxf_listitem *wxf_playlist::add_item(const char *file_name)
 {
 	int ret = wxf_succ;
 	wxf_listitem *pitem;
 
 	pitem = new wxf_listitem(m_itemnum,file_name);
 	
+	pitem->set_like(m_bIsFav);
+
 	push_item(pitem);
-	return ret;
+	return pitem;
 }
 
 wxf_listitem *wxf_playlist::find_pre(int no)
@@ -161,10 +163,10 @@ int wxf_playlist::del_select()
 
 void wxf_playlist::save_list(const char *file_name)
 {
+#if 0
 	wxf_file_t fp;
 	wxf_listitem *temp = m_head;
 	fp = wxf_fopen(file_name,WXF_OM_CREATE);
-
 
 	while(temp != NULL)
 	{
@@ -173,9 +175,29 @@ void wxf_playlist::save_list(const char *file_name)
 		temp = temp->get_next();
 	}
 	wxf_fclose(fp);
+#else
+	wxf_filemap oFileMap;
+	
+	wxf_fileitemvec &oFileList = oFileMap.GetFileList();
+	oFileList.clear();
+
+	wxf_listitem *temp = m_head;
+	while(temp != NULL)
+	{
+		wxf_fileitem fileitem;
+		fileitem.m_strFilePath = temp->get_file();
+		fileitem.m_bIsLikeMusic = temp->get_like();
+		oFileList.push_back(fileitem);
+		temp = temp->get_next();
+	}
+
+	oFileMap.SaveFile(file_name);
+#endif
+	
 }
 bool wxf_playlist::load_list(const char *file_name)
 {
+#if 0
 	bool ret = false;
 	wxf_file_t fp;
 	char buf[256];
@@ -203,6 +225,29 @@ bool wxf_playlist::load_list(const char *file_name)
 	wxf_fclose(fp);
 
 	return ret;
+#else
+	bool ret = true;
+	wxf_filemap oFileMap;
+
+	if (!oFileMap.LoadFile(file_name))
+	{
+		return false;
+	}
+	wxf_fileitemvec &oFileItemVec = oFileMap.GetFileList();
+	for (int i = 0; i < oFileItemVec.size();i++)
+	{
+		wxf_fileitem &oFileItem = oFileItemVec[i];
+
+		if (wxf_pathfile_exist(oFileItem.m_strFilePath.c_str()) == 0)
+		{
+			wxf_listitem *pListitem = add_item(oFileItem.m_strFilePath.c_str());
+			pListitem->set_like(oFileItem.m_bIsLikeMusic);
+		}
+	}
+
+	return ret;
+#endif
+	
 }
 
 void wxf_playlist::init(void)
@@ -298,4 +343,154 @@ void wxf_playlist::click_item( int no,TNotifyUI *psender )
 	{
 		pitem->click_item(psender);
 	}
+}
+
+bool wxf_playlist::change_list(bool bIsFav)
+{
+	if (m_bIsFav == bIsFav)
+	{
+		return false;
+	}
+
+	m_nplay = 0;
+	m_itemnum = 0;
+	m_nselect = 0;
+
+	if (m_head != NULL)
+	{
+		save_list("temp.xml");
+		m_plist->RemoveAll();
+		m_head = NULL;
+		m_tail = NULL;
+	}
+	m_bIsFav = bIsFav;
+	load_list("temp.xml");
+	//system("del /F temp.xml");
+
+	return true;
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+//
+//
+#include "./tinyxml/tinyxml.h"
+class wxf_filelist
+{
+	
+public:
+	bool LoadList(TiXmlElement *pFileList);
+	bool SaveList(TiXmlElement *pFileList);
+
+	std::vector<wxf_fileitem> &GetList(){return m_vecFileItem;}
+	void SetList(std::vector<wxf_fileitem> &vecFileList){m_vecFileItem = vecFileList;}
+private:
+	std::vector<wxf_fileitem> m_vecFileItem;
+};
+
+bool wxf_filelist::LoadList( TiXmlElement *pFileList )
+{
+	TiXmlElement *pItem = pFileList->FirstChildElement("item");
+	while(pItem != NULL)
+	{
+		wxf_fileitem oFileItem;
+
+		oFileItem.m_strFilePath = pItem->FirstChild()->Value();
+		if (pItem->Attribute("islike"))
+		{
+			std::string strIsLike = pItem->Attribute("islike");
+			if (strIsLike == "true")
+			{
+				oFileItem.m_bIsLikeMusic = true;
+			}
+		}
+		pItem = pItem->NextSiblingElement("item");
+
+		m_vecFileItem.push_back(oFileItem);
+	}
+	return true;
+}
+
+bool wxf_filelist::SaveList( TiXmlElement *pFileList )
+{
+	for (int i = 0;i < m_vecFileItem.size();i++)
+	{
+		TiXmlElement *pItem = new TiXmlElement("item");
+
+		if (m_vecFileItem[i].m_bIsLikeMusic)
+		{
+			pItem->SetAttribute("islike","true");
+		}
+
+		pItem->InsertEndChild(TiXmlText(m_vecFileItem[i].m_strFilePath.c_str()));
+
+		pFileList->LinkEndChild(pItem);
+	}
+	return true;
+}
+
+
+bool wxf_filemap::LoadFile( const char *pstrFilePath )
+{
+	TiXmlDocument oXml;
+
+	if (!oXml.LoadFile(pstrFilePath)) return false;
+
+	TiXmlElement *pRoot = oXml.RootElement();
+
+	if (pRoot == NULL)
+	{
+		return false;
+	}
+
+	if (pRoot->Value() != std::string("playlist"))
+	{
+		return false;
+	}
+
+	TiXmlElement *pFileList = pRoot->FirstChildElement();
+	while (pFileList)
+	{
+		std::string strListName = pFileList->Value();
+		
+		wxf_filelist &filelist = m_mapFileMap[strListName];
+		filelist.LoadList(pFileList);
+
+		pFileList = pFileList->NextSiblingElement();
+	}
+
+	return true;
+}
+
+bool wxf_filemap::SaveFile( const char *pstrFilePath )
+{
+	TiXmlDocument oXml;
+	
+	TiXmlElement *pRoot = new TiXmlElement("playlist");
+
+	std::map<std::string,wxf_filelist>::iterator iteFileMap = m_mapFileMap.begin();
+
+	while(iteFileMap != m_mapFileMap.end())
+	{
+		TiXmlElement *pItem = new TiXmlElement(iteFileMap->first.c_str());
+		iteFileMap->second.SaveList(pItem);
+
+		pRoot->LinkEndChild(pItem);
+
+		iteFileMap++;
+	}
+
+	oXml.LinkEndChild(pRoot);
+	oXml.SaveFile(pstrFilePath);
+	return true;
+}	
+
+std::vector<wxf_fileitem> & wxf_filemap::GetFileList( const char *pstrTitle /*= "default"*/ )
+{
+	return m_mapFileMap[std::string(pstrTitle)].GetList();
+}
+
+void wxf_filemap::SetFileList( std::vector<wxf_fileitem> &vecFileLit,const char *pstrTitle /*= "default"*/ )
+{
+	m_mapFileMap[std::string(pstrTitle)].SetList(vecFileLit);
 }

@@ -20,7 +20,7 @@ private:
 	wxf_setting()
 		:m_strVersion("0.01"),
 		m_oFileName("mp_kuwo_setting.xml"),m_oRootDir(".\\"),
-		m_oPlayListPath("playlist.txt"),m_iPlayNo(0),
+		m_oPlayListPath("mp_kuwo_playlist.xml"),m_iPlayNo(0),
 		m_oLogDir(".\\"),m_oLogName("kuwo.log"),m_oLogLevel("3"),
 		m_oLoopMode("0")
 	{
