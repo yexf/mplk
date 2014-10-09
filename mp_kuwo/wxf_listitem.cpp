@@ -20,7 +20,8 @@ wxf_listitem::~wxf_listitem(void)
 	m_singername = NULL;
 	m_mvflag = NULL;
 
-	m_nop = NULL;
+	//m_nop = NULL;
+	m_like = NULL;
 	m_phl = NULL;
 	m_item = NULL;
 }
@@ -53,25 +54,27 @@ void wxf_listitem::init(void)
 	m_phl = new CHorizontalLayoutUI;
 
 	m_listno = new CLabelUI;
+	m_like = new CLabelUI;
 	m_songname = new CLabelUI;
 	m_singername = new CLabelUI;
 	m_mvflag = new CLabelUI;
-	m_nop = new CControlUI;
+	//m_nop = new CControlUI;
 
 	m_item->Add(m_phl);
 	m_item->SetAttribute("height","23");
 
 	m_listno->SetAttribute("width","30");
+	m_like->SetAttribute("width","24");
 	m_singername->SetAttribute("width","64");
 	m_mvflag->SetAttribute("width","20");
-	m_nop->SetAttribute("width","4");
+	//m_nop->SetAttribute("width","4");
 	m_listno->SetAttribute("align","right");
 
 	m_songname->SetAttribute("endellipsis","true");
 	m_singername->SetAttribute("endellipsis","true");
 
 	m_phl->Add(m_listno);
-	m_phl->Add(m_nop);
+	m_phl->Add(m_like);
 	m_phl->Add(m_songname);
 	m_phl->Add(m_singername);
 	m_phl->Add(m_mvflag);
@@ -85,13 +88,15 @@ void wxf_listitem::init(void)
 	m_defBKColor = m_item->GetBkColor();
 	m_PlayBKColor = 0x7f4f4f4f;
 
+	set_like(false);
+
 }
 int wxf_listitem::set_no(int no)
 {
 	m_no = no;
 
 	wxf_str temp;
-	temp.format(" %d.",no+1);
+	temp.format(" %d",no+1);
 
 	m_listno->SetText(temp.data());
 	m_item->SetTag(no);
@@ -152,4 +157,35 @@ void wxf_listitem::set_play( bool IsPlay )
 		m_songname->SetFont(14);
 		m_item->SetBkColor(m_defBKColor);
 	}
+}
+
+void wxf_listitem::set_like(bool Islike)
+{
+	wxf_str name = "CasualListenWhiteHeart.png";
+	wxf_str file = "";
+	if (!Islike)
+	{
+		file = "file='"+name+"' source='0,0,14,13'";
+	}
+	else
+	{
+		file = "file='"+name+"' source='15,0,29,13'";
+	}
+	wxf_str attr = file + " dest='5,5,19,18'";
+	m_like->SetBkImage(attr.c_str());
+
+	m_bIsLike = Islike;
+}
+
+void wxf_listitem::change_like()
+{
+	set_like(!m_bIsLike);
+}
+
+void wxf_listitem::click_item( TNotifyUI *pmsg )
+{
+	//if (pmsg->pSender == m_like)
+
+	if (::PtInRect(&m_like->GetPos(), pmsg->ptMouse))
+		set_like(!m_bIsLike);
 }

@@ -287,3 +287,15 @@ int wxf_playlist::get_order()
 {
 	return m_loopmode;
 }
+
+void wxf_playlist::click_item( int no,TNotifyUI *psender )
+{
+	wxf_listitem *pitem;
+
+	pitem = find_item(no);
+
+	if (pitem)
+	{
+		pitem->click_item(psender);
+	}
+}

@@ -52,6 +52,8 @@ public:
 
 	int get_order();
 	void set_order(int loopmode, CButtonUI *pOrder);
+
+	void click_item(int no,TNotifyUI *psender);
 protected:
 	CListUI *m_plist;
 private:

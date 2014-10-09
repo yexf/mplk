@@ -212,9 +212,10 @@ void wxf_kuwo::ActivateItem(int no)
 	m_playctl->len_time(m_pPL_LBL_TotalTime);
 }
 
-void wxf_kuwo::ClickItem(int no)
+void wxf_kuwo::ClickItem(int no,TNotifyUI *pmsg)
 {
 	m_playlist->set_select(no);
+	m_playlist->click_item(no,pmsg);
 }
 
 void wxf_kuwo::PlayCtrl(CControlUI *psender)
@@ -351,7 +352,7 @@ void wxf_kuwo::Notify(TNotifyUI& msg)
 	else if( msg.sType == _T("itemclick") ) 
 	{
 		int no = msg.pSender->GetTag();
-		ClickItem(no);
+		ClickItem(no,&msg);
 	}
 	else if( msg.sType == _T("valuechanged") )
 	{

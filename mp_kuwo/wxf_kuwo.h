@@ -105,7 +105,7 @@ private:
 	
 	void DelItem();
 	void ActivateItem(int no);
-	void ClickItem(int no);
+	void ClickItem(int no,TNotifyUI *pmsg);
 	void PlayCtrl(CControlUI *psender);
 	void ValueChange(CControlUI *psender);
 	void LyricChange(CControlUI *psender);
