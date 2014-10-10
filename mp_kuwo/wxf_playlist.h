@@ -10,33 +10,7 @@
 ** Description:播放列表 为播放控制器提供播放内容
 **************************************************************************************/ 
 #pragma once
-#include <vector>
-#include <string>
-#include <map>
-class wxf_filelist;
-struct wxf_fileitem
-{
-	std::string m_strFilePath;
-	bool m_bIsLikeMusic;
-	wxf_fileitem():m_strFilePath(""),m_bIsLikeMusic(false)
-	{
-	}
-	wxf_fileitem(std::string strFilePath,bool bIsLikeMusic = false)
-		:m_strFilePath(strFilePath),m_bIsLikeMusic(bIsLikeMusic)
-	{
-	}
-};
-typedef std::vector<wxf_fileitem> wxf_fileitemvec;
-class wxf_filemap
-{
-public:
-	bool LoadFile(const char *pstrFilePath);
-	bool SaveFile(const char *pstrFilePath);
-	wxf_fileitemvec &GetFileList(const char *pstrTitle = "default");
-	void SetFileList(wxf_fileitemvec &vecFileLit,const char *pstrTitle = "default");
-private:
-	std::map<std::string,wxf_filelist> m_mapFileMap;
-};
+#include "wxf_glog.h"
 
 class wxf_playlist
 {
@@ -109,23 +83,25 @@ private:
 
 	inline void wxf_logout(int ret,const char *inf,char *msg)
 	{
-		wxf_log	*log;
+		//wxf_log	*log;
 
-		log = m_log;
+		//log = m_log;
 
 		if (ret == 0)
 		{
-			log->FormatAdd(
+			/*log->FormatAdd(
 				wxf_log::error,
 				"wxf_playlist :[%s]=>>%s",
-				inf,msg);
+				inf,msg);*/
+			GLOG.error().print("wxf_playlist :[%s]=>>%s",inf,msg);
 		}
 		else
 		{
-			log->FormatAdd(
+			/*log->FormatAdd(
 				wxf_log::trace,
 				"wxf_playlist :[%s]=>>%s",
-				inf,msg);
+				inf,msg);*/
+			GLOG.trace().print("wxf_playlist :[%s]=>>%s",inf,msg);
 		}
 	}
 };

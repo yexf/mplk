@@ -25,7 +25,9 @@ void wxf_kuwo::DeInit()
 	delete m_playctl;
 	delete m_playlist;
 	m_log->Add("关闭日志文件");
-	delete m_log;	
+	//delete m_log;	
+	m_log->Close();
+	m_log = NULL;
 }
 void wxf_kuwo::Prepare()
 {
@@ -97,8 +99,10 @@ void wxf_kuwo::Init()
 		SetIcon(temp.c_str());
 	}
 
-	m_log = new wxf_log;
+	//m_log = new wxf_log;
 	
+	wxf_log &oLog = wxf_slog::get_mutable_instance().get_log();
+	m_log = &oLog;
 
 	m_log->SetLogLevel(atoi(oSetting.m_oLogLevel.c_str()));
 	m_log->SetLogPath(oSetting.m_oLogDir.c_str());

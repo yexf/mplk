@@ -22,4 +22,6 @@ using namespace libZPlay;
 #include "wxf_playctl.h"
 #include "wxf_setting.h"
 
+#include "wxf_glog.h"
+
 
