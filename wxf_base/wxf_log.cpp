@@ -458,6 +458,153 @@ int wxf_log::FormatAdd(int nCurLevel,const char * formatString, ...)
 	return nMaxLen;
 }
 
+int wxf_log::Format(int nCurLevel,const char * formatString, va_list argList)
+{
+	// if the format string is NULL ,return 
+	if (formatString == NULL)
+	{
+		return -1;
+	}
+		
+	//va_list argList;
+
+	// Set va_list to the beginning of optional arguments
+	//va_start(argList, formatString);
+
+	const char * ptr = formatString;
+	char * str = NULL;
+
+	//save the max len of the formatstring
+	int    nMaxLen = 0;
+
+	while(*ptr != '\0')
+	{
+		str = NULL;
+
+		if(*ptr == '%')
+		{
+			switch(*(ptr+1))
+			{
+			case 's':
+			case 'S':
+				str = va_arg(argList,char*);
+
+				if( NULL == str)
+					nMaxLen ++;
+				else
+					nMaxLen += strlen(str);
+				ptr++;
+				break;
+
+			case 'c':
+			case 'C':
+				va_arg(argList,char);
+				nMaxLen +=2;
+				ptr++;
+				break;
+
+			case 'd':
+			case 'D':
+				va_arg(argList, int);
+				nMaxLen +=11;
+				ptr++;
+				break;
+
+			case 'u':
+			case 'U':
+				va_arg(argList, unsigned int);
+				nMaxLen +=10;
+				ptr++;
+				break;
+
+			case 'l':
+			case 'L':
+				ptr++;
+				if(*(ptr+1) == 'd')
+				{
+					va_arg(argList, long);
+					nMaxLen +=11;
+				}
+				else if(*(ptr+1) == 'u')
+				{
+					va_arg(argList, unsigned long);
+					nMaxLen +=10;
+				}
+				ptr++;
+				break;
+			case 'f':
+			case 'F':
+				va_arg(argList, double);
+				nMaxLen += 31;
+				ptr++;
+				break;
+			case 'x':
+			case 'X':
+				va_arg(argList, void*);
+				nMaxLen += 2*sizeof(void*);
+				ptr++;
+				break;
+			default:
+				nMaxLen+=1;
+			}
+		} //  if(*ptr == '%')
+		else
+		{
+			nMaxLen +=1;
+		}
+		// Increment pointer..
+		ptr++;
+	}
+
+	// end va_list
+	va_end(argList);
+
+	// allocate memory
+	//char * pchar = new char[nMaxLen+1];
+
+	//if(pchar == NULL)
+	//	return 0;
+	nMaxLen += 255;       // 防止特殊情况长度计算错误；
+    wxf_str strDes(""); 
+	strDes.reserve(nMaxLen); 
+
+	try{
+		// get parament
+		va_start(argList, formatString);  
+		
+		// format
+		//vsprintf(pchar, formatString, argList);
+        /*
+        * ----- commented by qingch   3/12/2009 ------
+          vsprintf((char*)strDes.c_str(), formatString, argList);
+        */
+		vsprintf(strDes.data(), formatString, argList);
+		// if the curlevel >= setted level,not write 
+		// the number of level more bigger indicate the level is more lower
+		if(nCurLevel <= m_nLevel)
+		{
+			// tty output	
+			//printf("%s\n",pchar);
+			printf("%s\n",strDes.c_str());
+			
+			// write file
+			//Flush(pchar);
+			Flush(strDes.c_str(),nCurLevel);
+		}
+		
+		//if(pchar != NULL)
+		//	delete [] pchar;
+		
+		va_end(argList);
+	}
+	catch(...)
+	{
+		return 0;
+	}
+
+	return nMaxLen;
+}
+
 /*************************************************************
  函 数 名：SetLogLevel()
  功能概要：设置日志级别

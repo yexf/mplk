@@ -17,8 +17,6 @@
 *************************************************************/
 wxf_lock::wxf_lock(bool bInit)
 {
-	wxf_memset(ch_host,0,WXF_MAX_NAME);
-	bInit = false;
 	if (bInit)
 	{
 		init(NULL);

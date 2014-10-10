@@ -57,8 +57,9 @@ public:
 	virtual bool Close();
 
 	//按照指定的级别格式化输入
-	virtual int  FormatAdd(int nCurLevel,const char* formatString, ...);	
+	virtual int  FormatAdd(int nCurLevel,const char* formatString, ...);
 
+	virtual int  Format(int nCurLevel,const char * formatString, va_list argList);
 	//按照指定的级别输入字符串
 	virtual void Add(const char * pchLog,int nCurLevel= wxf_log::trace);
 
