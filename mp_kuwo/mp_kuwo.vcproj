@@ -224,10 +224,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\wxf_glog.h"
-				>
-			</File>
-			<File
 				RelativePath=".\wxf_kuwo.h"
 				>
 			</File>

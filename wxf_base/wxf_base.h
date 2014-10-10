@@ -215,6 +215,7 @@ bool IsChinese(const char *pzInfo);
 #include "wxf_file.h"
 #include "wxf_log.h"
 #include "wxf_icov.h"
+#include "wxf_singleton.hpp"
 
 #ifndef WXF_LIB
 #pragma comment(lib,"../lib/wxf_base.lib")

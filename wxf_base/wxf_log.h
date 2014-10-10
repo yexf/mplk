@@ -91,4 +91,46 @@ private:
 	long      m_nMaxSize;
 };
 
+
+#ifdef USE_GLOBE_LOG
+#include "wxf_singleton.hpp"
+class wxf_slog:public wxf::singleton<wxf_slog>
+{
+public:
+	wxf_slog &debug()
+	{
+		m_iCurLevel = wxf_log::warning;
+		return *this;
+	}
+	wxf_slog &error()
+	{
+		m_iCurLevel = wxf_log::error;
+		return *this;
+	}
+	wxf_slog &trace()
+	{
+		m_iCurLevel = wxf_log::trace;
+		return *this;
+	}
+	int print(const char * formatString, ...)
+	{
+		va_list argList;
+
+		va_start(argList, formatString);
+
+		return m_oLog.Format(m_iCurLevel,formatString,argList);
+	}
+	wxf_log &get_log()
+	{
+		return m_oLog;
+	}
+private:
+	int m_iCurLevel;
+	wxf_log m_oLog;
+};
+
+#define GLOG		(wxf_slog::get_mutable_instance())
+
+#endif
+
 #endif /*_wxf_log_h_*/

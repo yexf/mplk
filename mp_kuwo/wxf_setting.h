@@ -14,9 +14,9 @@ typedef TiXmlDeclaration	wxf_decl;		//文档声明
 typedef TiXmlNode			wxf_node;		//节点
 typedef TiXmlNode::NodeType wxf_node_type;	//节点类型
 
-class wxf_setting
+class wxf_setting:public wxf::singleton<wxf_setting>
 {
-private:
+public:
 	wxf_setting()
 		:m_strVersion("0.01"),
 		m_oFileName("mp_kuwo_setting.xml"),m_oRootDir(".\\"),
@@ -46,10 +46,6 @@ public:
 	int GetLoopMode();
 	void SetLoopMode(int mode);
 public:
-	static wxf_setting &get_instance() {return g_setting;}
-	static const wxf_setting &get_const_instance() {return g_setting;}
-public:
-	static wxf_setting g_setting;
 
 	wxf_str m_oRootDir;
 

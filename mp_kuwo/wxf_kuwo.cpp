@@ -10,7 +10,7 @@ wxf_kuwo::~wxf_kuwo(void)
 }
 void wxf_kuwo::DeInit()
 {
-	wxf_setting &oSetting = wxf_setting::get_instance();
+	wxf_setting &oSetting = wxf_setting::get_mutable_instance();
 
 
 	int iPlayNo = m_playlist->get_play();
@@ -86,7 +86,7 @@ void wxf_kuwo::Init()
 	t = (CStdString)m_pm.GetInstancePath();
 	m_inspath = t.GetData();
 
-	wxf_setting &oSetting = wxf_setting::get_instance();
+	wxf_setting &oSetting = wxf_setting::get_mutable_instance();
 
 	oSetting.SetRootDir(m_inspath+"run");
 	oSetting.LoadSetting();
@@ -120,7 +120,7 @@ void wxf_kuwo::Init()
 	bool btemp = m_playlist->load_list(m_listpath.c_str());
 	if (btemp)
 	{
-		m_playlist->set_play(atoi(wxf_setting::get_instance().m_iPlayNo.c_str()));
+		m_playlist->set_play(atoi(oSetting.m_iPlayNo.c_str()));
 		//m_playctl->play(m_playlist);
 		m_iDelayPlay = 25;
 	}

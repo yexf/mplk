@@ -210,6 +210,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\wxf_singleton.hpp"
+				>
+			</File>
+			<File
 				RelativePath=".\wxf_str.h"
 				>
 			</File>

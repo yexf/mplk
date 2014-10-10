@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "wxf_setting.h"
-wxf_setting wxf_setting::g_setting;
+
 bool wxf_setting::LoadSetting()
 {
 	wxf_str strSettingPath = m_oRootDir + m_oFileName; 
