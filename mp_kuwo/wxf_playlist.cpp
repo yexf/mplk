@@ -179,10 +179,8 @@ int wxf_playlist_view::play_pre()
 			{
 				pIter = m_mapItem.end();
 			}
-			else
-			{
-				pIter--;
-			}
+			pIter--;
+			
 			return pIter->first;
 		}
 	case EM_LISTPLAY:
@@ -284,7 +282,7 @@ int wxf_playlist_view::near_index(int index)
 			return index+i;
 		}
 	}
-	return -1;
+	return m_pDoc->get_index(m_mapItem.begin()->second->get_data());
 }
 
 
