@@ -370,3 +370,155 @@ bool wxf_playlist::change_list(bool bIsFav)
 
 	return true;
 }
+
+int wxf_playlist_view::add_item( wxf_item_data *pData,int index)
+{
+	m_mapItem[index].update_view(pData);
+
+	m_pList->Add(m_mapItem[index]);
+	return index;
+}
+
+
+void wxf_playlist_view::del_item()
+{
+	map<int,wxf_item_view>::iterator pIter = m_mapItem.find(m_iSelectIndex);
+	wxf_item_view *pView = NULL;
+
+	if (pIter != m_mapItem.end())
+	{
+		pView = &pIter->second;
+		pIter++;
+
+		while (pIter != m_mapItem.end())
+		{
+			pView->update_view(pIter->second.get_data());
+		}
+
+		pIter--;
+
+		m_pList->Remove(pIter->second);
+		m_mapItem.erase(pIter);
+
+	}
+}
+
+void wxf_playlist_view::set_select( int index )
+{
+	m_iSelectIndex = index;
+}
+
+void wxf_playlist_view::set_play( int index )
+{
+	map<int,wxf_item_view>::iterator pOldPlay = m_mapItem.find(m_iPlayIndex);
+	map<int,wxf_item_view>::iterator pNewPlay = m_mapItem.find(index);
+	wxf_item_data *pData;
+
+	if (pNewPlay != m_mapItem.end())
+	{
+		if (pOldPlay != m_mapItem.end())
+		{
+			pData = pOldPlay->second.get_data();
+			pData->set_play(false);
+			pOldPlay->second.update_view(pData);
+		}
+		m_iPlayIndex = index;
+		pData = pNewPlay->second.get_data();
+		pData->set_play(false);
+		pNewPlay->second.update_view(pData);
+	}
+}
+
+int wxf_playlist_view::get_order()
+{
+	return get_doc()->get_loopmode();
+}
+
+void wxf_playlist_view::set_order( int loopmode, CButtonUI *pOrder )
+{
+	wxf_str filename,tip;
+
+	int emLoopmode = get_order();
+	emLoopmode = loopmode % EM_MODEMAX;
+
+	switch(emLoopmode)
+	{
+	case EM_LISTLOOP:
+		filename = "PlaylistBtnIcoModeCircle.png";
+		tip = "循环播放";
+		break;
+	case EM_LISTPLAY:
+		filename = "PlaylistBtnIcoModeOrder.png";
+		tip = "顺序播放";
+		break;
+	case EM_SONGLOOP:
+		filename = "PlaylistBtnIcoModeSingle.png";
+		tip = "单曲循环";
+		break;
+	case EM_RANDOMLOOP:
+		filename = "PlaylistBtnIcoModeRand.png";
+		tip = "随机播放";
+		break;
+	default:break;
+
+	}
+	wxf_str attr = "file='" + filename + "' dest='3,2,44,18'";
+	pOrder->SetBkImage(attr.c_str());
+	pOrder->SetToolTip(tip.c_str());
+
+	get_doc()->set_loopmode(emLoopmode);
+}
+
+int wxf_playlist_view::update_next( int playindex /*= -1*/ )
+{
+	if (playindex == -1)
+	{
+		playindex = m_iPlayIndex;
+	}
+
+	map<int,wxf_item_view>::iterator pIter = m_mapItem.find(playindex);
+
+	switch (get_order())
+	{
+	case EM_LISTLOOP:
+		{
+			pIter++;
+			if (pIter == m_mapItem.end())
+			{
+				pIter = m_mapItem.begin();
+			}
+			return pIter->first;
+		}
+	case EM_LISTPLAY:
+		{
+			pIter++;
+			if (pIter == m_mapItem.end())
+			{
+				return -1;
+			}
+			return pIter->first;
+		}
+	case EM_RANDOMLOOP:
+		{
+			return get_mapat(wxf_rand(playindex));
+		}
+	case EM_SONGLOOP:
+		{
+			return playindex;
+		}
+	}
+	return -1;
+}
+
+int wxf_playlist_view::get_mapat( int iNo )
+{
+	iNo = iNo % m_mapItem.size();
+	map<int,wxf_item_view>::iterator pIter = m_mapItem.begin();
+
+	for (int i = 0; i < iNo;i++)
+	{
+		pIter++;
+	}
+	return pIter->first;
+}
+
