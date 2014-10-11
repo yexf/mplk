@@ -275,6 +275,18 @@ void wxf_playlist_view::update_view( bool bFav )
 	}
 }
 
+int wxf_playlist_view::near_index(int index)
+{
+	for (int i=0;i<m_pDoc->get_count();i++)
+	{
+		if (m_mapItem.find(index+i) != m_mapItem.end())
+		{
+			return index+i;
+		}
+	}
+	return -1;
+}
+
 
 
 void wxf_playlist_doc::save_list( const char *file_name )

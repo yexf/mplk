@@ -130,6 +130,8 @@ public:
 
 	int get_mapat(int iNo);
 
+	int near_index(int index);
+
 public:
 	void set_doc(wxf_playlist_doc *pDoc)
 	{
@@ -172,19 +174,32 @@ public:
 	}
 	bool play_next()
 	{
-		int index = m_oPlayListView.play_next();
+		int index = m_oPlayListView.get_play();
+		m_oPlayListDoc.get_data(index)->set_play(false);
+
+		index = m_oPlayListView.play_next();
+		if (index == -1)
+		{
+			index = m_oPlayListView.near_index(get_play());
+		}
 		if (index == -1)
 		{
 			return false;
 		}
-	
 		m_oPlayListView.set_play(index);
 
 		return true;
 	}
 	bool play_pre()
 	{
-		int index = m_oPlayListView.play_pre();
+		int index = m_oPlayListView.get_play();
+		m_oPlayListDoc.get_data(index)->set_play(false);
+
+		index = m_oPlayListView.play_pre();
+		if (index == -1)
+		{
+			index = m_oPlayListView.near_index(get_play());
+		}
 		if (index == -1)
 		{
 			return false;
@@ -215,9 +230,12 @@ public:
 
 	void set_play(int no)
 	{
-		wxf_str temp;
-		temp.format("[wxf_playlist]:ÉèÖÃ²¥·ÅºÅ:%d",no);
-		GLOG.trace().add(temp.c_str());
+		int index = m_oPlayListView.get_play();
+		if (index != -1)
+		{
+			m_oPlayListDoc.get_data(index)->set_play(false);
+		}		
+
 		m_oPlayListView.set_play(no);
 	}
 
@@ -287,7 +305,10 @@ public:
 		if (bIsFav != get_fav())
 		{
 			set_fav(bIsFav);
+			int index = m_oPlayListView.get_play();
+
 			m_oPlayListView.add_doc(&m_oPlayListDoc,bIsFav);
+			//select_item(index);
 		}
 		return get_fav();
 	}
