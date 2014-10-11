@@ -79,13 +79,13 @@ int wxf_playctl::play(wxf_playlist *plist)
 	{
 		return wxf_succ;
 	}
-
-	wxf_listitem *pitem;
-	pitem = plist->get_pcur();
-
-	ret = play(m_player,pitem->get_file());
-	plist->select_item(pitem);
-
+	if (plist->get_play() == -1)
+	{
+		plist->set_play(0);
+	}
+	ret = play(m_player,plist->get_curfile());
+	
+	plist->select_item(plist->get_play()-1);
 	return ret;
 }
 int wxf_playctl::stop(wxf_playlist *plist)
@@ -99,20 +99,22 @@ int wxf_playctl::stop(wxf_playlist *plist)
 }
 int wxf_playctl::over(wxf_playlist *plist)
 {
-	int ret = wxf_succ;
+	int ret = wxf_err;
 	if (m_player->get_state() != wxf_player::EM_OVER)
 	{
 		return wxf_err;
 	}
+
 	ret = m_player->stop();
 	m_bplay = false;
-	wxf_listitem *pitem;
-	pitem = plist->get_next();
 
-	ret = play(m_player,pitem->get_file());
-	plist->select_item(pitem);
-	plist->set_play(pitem->get_no());
-	m_bplay = true;
+	if (plist->play_next())
+	{
+		ret = play(m_player,plist->get_curfile());
+		plist->select_item(plist->get_play()-1);
+		m_bplay = true;
+	}
+
 	return ret;
 }
 int wxf_playctl::pause(wxf_playlist *plist)
@@ -126,39 +128,33 @@ int wxf_playctl::pause(wxf_playlist *plist)
 }
 int wxf_playctl::pre(wxf_playlist *plist)
 {
-	int ret = wxf_succ;
-
-	wxf_listitem *pitem;
-
-	pitem = plist->get_pcur();
-	pitem = plist->get_pre(pitem);
+	int ret = wxf_err;
 
 	ret = m_player->stop();
 	m_bplay = false;
 
-	ret = play(m_player,pitem->get_file());
-	plist->select_item(pitem);
-	plist->set_play(pitem->get_no());
-	m_bplay = true;
-
+	if (plist->play_pre())
+	{
+		ret = play(m_player,plist->get_curfile());
+		plist->select_item(plist->get_play()-1);
+		m_bplay = true;
+	}
+	
 	return ret;
 }
 int wxf_playctl::next(wxf_playlist *plist)
 {
-	int ret = wxf_succ;
+	int ret = wxf_err;
 
 	ret = m_player->stop();
 	m_bplay = false;
-	wxf_listitem *pitem;
-	pitem = plist->get_next();
-	if (pitem == NULL)
+
+	if (plist->play_next())
 	{
-		return wxf_err;
+		ret = play(m_player,plist->get_curfile());
+		plist->select_item(plist->get_play()-1);
+		m_bplay = true;
 	}
-	ret = play(m_player,pitem->get_file());
-	plist->select_item(pitem);
-	plist->set_play(pitem->get_no());
-	m_bplay = true;
 
 	return ret;
 }
@@ -245,8 +241,10 @@ int wxf_playctl::play(wxf_player *player,const char *file_name)
 		ret = player->ready(file_name);
 
 	ret += player->play();
+
 	if (ret == wxf_succ)
 	{
+		
 		m_bplay = true;
 		return ret;
 	}

@@ -7,6 +7,19 @@
 
 bool wxf_filelist::LoadList( TiXmlElement *pFileList )
 {
+	if (pFileList->Attribute("isfav"))
+	{
+		std::string strIsLike = pFileList->Attribute("isfav");
+		if (strIsLike == "true")
+		{
+			m_bFav = true;
+		}
+	}
+	else
+	{
+		m_bFav = false;
+	}
+
 	TiXmlElement *pItem = pFileList->FirstChildElement("item");
 	while(pItem != NULL)
 	{
@@ -42,6 +55,11 @@ bool wxf_filelist::SaveList( TiXmlElement *pFileList )
 		pItem->InsertEndChild(TiXmlText(m_vecFileItem[i].m_strFilePath.c_str()));
 
 		pFileList->LinkEndChild(pItem);
+	}
+
+	if (m_bFav)
+	{
+		pFileList->SetAttribute("isfav","true");
 	}
 	return true;
 }
@@ -110,4 +128,14 @@ std::vector<wxf_fileitem> & wxf_filemap::GetFileList( const char *pstrTitle /*= 
 void wxf_filemap::SetFileList( std::vector<wxf_fileitem> &vecFileLit,const char *pstrTitle /*= "default"*/ )
 {
 	m_mapFileMap[std::string(pstrTitle)].SetList(vecFileLit);
+}
+
+bool wxf_filemap::GetFav( const char *pstrTitle /*= "default"*/ )
+{
+	return m_mapFileMap[std::string(pstrTitle)].GetFav();
+}
+
+void wxf_filemap::SetFav( bool bFav,const char *pstrTitle /*= "default"*/ )
+{
+	return m_mapFileMap[std::string(pstrTitle)].SetFav(bFav);
 }

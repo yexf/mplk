@@ -112,13 +112,9 @@ public:
 		m_iCurLevel = wxf_log::trace;
 		return *this;
 	}
-	int print(const char * formatString, ...)
+	void add(const char * formatString)
 	{
-		va_list argList;
-
-		va_start(argList, formatString);
-
-		return m_oLog.Format(m_iCurLevel,formatString,argList);
+		m_oLog.Add(formatString,m_iCurLevel);
 	}
 	wxf_log &get_log()
 	{

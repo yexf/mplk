@@ -121,7 +121,7 @@ void wxf_kuwo::Init()
 	if (btemp)
 	{
 		m_playlist->set_play(atoi(oSetting.m_iPlayNo.c_str()));
-		//m_playctl->play(m_playlist);
+		m_pClassListBtn->Selected(m_playlist->get_fav());
 		m_iDelayPlay = 25;
 	}
 
@@ -157,7 +157,11 @@ void wxf_kuwo::Timer()
 		{
 			m_pPlayerProgress->SetValue(temp);
 		}
-		m_pMessageLable->SetText(m_playlist->get_pcur()->get_file());
+		if (m_playlist->get_curfile())
+		{
+			m_pMessageLable->SetText(m_playlist->get_curfile());
+		}
+		
 		m_playctl->len_time(m_pPL_LBL_TotalTime);
 		m_playctl->cur_time(m_pPL_LBL_CurTime);
 		m_playctl->draw_fft(m_hWnd,m_nFFTPanel);
@@ -221,7 +225,7 @@ void wxf_kuwo::ActivateItem(int no)
 
 void wxf_kuwo::ClickItem(int no,TNotifyUI *pmsg)
 {
-	m_playlist->set_select(no);
+	//m_playlist->set_select(no);
 	m_playlist->click_item(no,pmsg);
 }
 
@@ -357,13 +361,13 @@ void wxf_kuwo::Notify(TNotifyUI& msg)
 	}
 	else if( msg.sType == _T("itemactivate") ) 
 	{
-		int no = msg.pSender->GetTag();
-		ActivateItem(no);
+		wxf_item_view *pView = (wxf_item_view *)msg.pSender->GetTag();
+		ActivateItem(m_playlist->get_index(pView));
 	}
 	else if( msg.sType == _T("itemclick") ) 
 	{
-		int no = msg.pSender->GetTag();
-		ClickItem(no,&msg);
+		wxf_item_view *pView = (wxf_item_view *)msg.pSender->GetTag();
+		ClickItem(m_playlist->get_index(pView),&msg);
 	}
 	else if( msg.sType == _T("valuechanged") )
 	{
@@ -581,19 +585,22 @@ void wxf_kuwo::OrderChange( CControlUI *psender )
 
 void wxf_kuwo::ListChange( CControlUI *psender )
 {
-	/*bool bRst = false;
+	bool bRst = false;
 	if (psender == m_pDefaultListBtn)
 	{
 		bRst = m_playlist->change_list(false);
+		m_pDel->SetEnabled(true);
 	}
 	else
 	{
 		bRst = m_playlist->change_list(true);
+		m_pDel->SetEnabled(false);
 	}
 	if (bRst)
 	{
-		PlayCtrl(0);	
-	}*/
+		//PlayCtrl(0);	
+		//m_playctl->stop(m_playlist);
+	}
 }
 
 #endif
