@@ -1,8 +1,9 @@
 #include "pch.h"
-
+#include <shellapi.h>
 wxf_kuwo::wxf_kuwo(void)
 {
 	m_use_timer = true;
+	m_bIsTary = true;
 }
 wxf_kuwo::~wxf_kuwo(void)
 {
@@ -535,6 +536,14 @@ LRESULT wxf_kuwo::OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bH
 		bHandled = TRUE;
 		return 0;
 	}
+	if (wParam == SC_MINIMIZE)
+	{
+		if (m_bIsTary)
+		{
+			ToTary();
+			return 0;
+		}
+	}
 	BOOL bZoomed = ::IsZoomed(*this);
 	LRESULT lRes = CWindowWnd::HandleMessage(uMsg, wParam, lParam);
 	if( ::IsZoomed(*this) != bZoomed ) {
@@ -548,6 +557,43 @@ LRESULT wxf_kuwo::OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bH
 		}
 	}
 	return lRes;
+}
+
+
+LRESULT wxf_kuwo::OnTray( UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+{
+	if (wParam != IDR_MPLK)
+	{
+		return 1;
+	}
+
+	switch(lParam)
+	{
+	case WM_RBUTTONUP://右键起来时弹出快捷菜单，这里只有一个“关闭”
+		{
+			//LPPOINT lpoint=new tagPOINT;
+			//::GetCursorPos(lpoint);//得到鼠标位置
+			//CMenu menu;
+			//menu.CreatePopupMenu();//声明一个弹出式菜单
+			////增加菜单项“关闭”，点击则发送消息WM_DESTROY给主窗口（已
+			////隐藏），将程序结束。
+			//menu.AppendMenu(MF_STRING,WM_DESTROY,"关闭"); 
+			////确定弹出式菜单的位置
+			//menu.TrackPopupMenu(TPM_LEFTALIGN,lpoint->x,lpoint->y,this);
+			////资源回收
+			//HMENU hmenu=menu.Detach();
+			//menu.DestroyMenu();
+			//delete lpoint;
+		}
+		break;
+	case WM_LBUTTONDBLCLK://双击左键的处理
+		{
+			::ShowWindow(m_hWnd, SW_SHOW);//简单的显示主窗口完事儿
+		}
+		break;
+	}
+	return 0;
+	return 0;
 }
 
 LRESULT wxf_kuwo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -569,6 +615,7 @@ LRESULT wxf_kuwo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	//case WM_ADDFILE:	   lRes = OnAddFile(uMsg, wParam, lParam, bHandled); break;
 	//case WM_PLAYCTL:	   lRes = OnPlayCtrl(uMsg, wParam, lParam, bHandled); break;
 	//case WM_DELITEM:	   lRes = OnDelItem(uMsg, wParam, lParam, bHandled); break;
+	case WM_SHOWTASK:	   lRes = OnTray(uMsg, wParam, lParam, bHandled); break;
 	default:
 		bHandled = FALSE;
 	}
@@ -601,6 +648,29 @@ void wxf_kuwo::ListChange( CControlUI *psender )
 		//PlayCtrl(0);	
 		//m_playctl->stop(m_playlist);
 	}
+}
+
+
+void wxf_kuwo::ToTary()
+{
+	NOTIFYICONDATA  nid; 
+	
+	wxf_str temp = m_respath;
+	temp = temp + "icon.ico";
+	HICON hIcon = (HICON)::LoadImage(CPaintManagerUI::GetInstance(), temp.c_str(), 
+		IMAGE_ICON, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON), LR_LOADFROMFILE);
+
+	nid.cbSize = (DWORD)sizeof(NOTIFYICONDATA); 
+	nid.hWnd = this->m_hWnd; 
+	nid.uID = IDR_MPLK; 
+	nid.uFlags = NIF_ICON|NIF_MESSAGE|NIF_TIP; 
+	nid.uCallbackMessage = WM_SHOWTASK;//自定义的消息名称 
+	nid.hIcon = hIcon; 
+	strcpy(nid.szTip, "MPLK");		//信息提示条为“计划任务提醒”
+
+	::Shell_NotifyIcon(NIM_ADD,&nid);//在托盘区添加图标 
+	
+	::ShowWindow(m_hWnd, SW_HIDE);//隐藏主窗口 
 }
 
 #endif

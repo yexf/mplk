@@ -3,7 +3,9 @@
 //#define WM_PLAYCTL						WM_USER + 0x0001
 //#define WM_ADDFILE						WM_USER + 0x0002
 //#define WM_DELITEM						WM_USER + 0x0003
-//#define WM_TIMER25HZ					WM_USER + 0x0004
+//#define WM_TIMER25HZ						WM_USER + 0x0004
+#define WM_SHOWTASK							WM_USER + 0x0005
+#define IDR_MPLK							0xA0000001
 
 class wxf_player;
 class wxf_playlist;
@@ -43,6 +45,7 @@ public:
 
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+	LRESULT OnTray(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 protected:
 	CPaintManagerUI m_pm;
 	CVerticalLayoutUI *m_pRoot;
@@ -97,6 +100,8 @@ private:
 	wxf_str m_inspath;
 	wxf_str m_listpath;
 
+	bool m_bIsTary;
+
 private:
 	void DeInit();
 	void Init();
@@ -115,6 +120,8 @@ private:
 
 	void OrderChange(CControlUI *psender);
 	void ListChange(CControlUI *psender);
+
+	void ToTary();
 private:
 	inline void wxf_logout(int ret,const char *inf,char *msg)
 	{
