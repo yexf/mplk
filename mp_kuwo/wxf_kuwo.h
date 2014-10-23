@@ -8,6 +8,7 @@
 #define WM_HIDETASK							WM_USER + 0x0006
 #define IDR_MPLK							0xA0000001
 
+
 class wxf_player;
 class wxf_playlist;
 class wxf_playctl;
@@ -102,6 +103,8 @@ private:
 	wxf_str m_listpath;
 
 	bool m_bIsTary;
+
+	wxf_delaylist m_delaylist;
 
 private:
 	void DeInit();

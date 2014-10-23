@@ -180,6 +180,7 @@ void wxf_kuwo::Timer()
 			m_iDelayPlay--;
 		}		
 	}
+	m_delaylist.DoTime();
 }
 
 
@@ -419,6 +420,9 @@ LRESULT wxf_kuwo::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandl
 	::SetWindowLong(*this, GWL_STYLE, styleValue | WS_CLIPSIBLINGS | WS_CLIPCHILDREN);
 
 	m_pm.Init(m_hWnd);
+
+	m_delaylist.SetWnd(m_hWnd);
+
 	CDialogBuilder builder;
 	CControlUI* pRoot = builder.Create(_T("skin.xml"), (UINT)0,  NULL, &m_pm);
 	wxf_assert(pRoot);
@@ -604,7 +608,8 @@ LRESULT wxf_kuwo::OnTray( UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandle
 	case WM_LBUTTONDBLCLK://双击左键的处理
 		{
 			::ShowWindow(m_hWnd, SW_SHOW);//简单的显示主窗口完事儿
-			SendMessage(WM_HIDETASK);
+			//SendMessage(WM_HIDETASK);
+			m_delaylist.AddDelay(10,WM_HIDETASK);
 		}
 		break;
 	}
