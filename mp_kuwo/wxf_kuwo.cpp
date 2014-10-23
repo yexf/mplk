@@ -562,11 +562,26 @@ LRESULT wxf_kuwo::OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bH
 
 LRESULT wxf_kuwo::OnTray( UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
+	if (uMsg == WM_HIDETASK)
+	{
+		NOTIFYICONDATA  nid; 
+
+		nid.cbSize = (DWORD)sizeof(NOTIFYICONDATA); 
+		nid.hWnd = m_hWnd; 
+		nid.uID = IDR_MPLK; 
+		nid.uFlags = NIF_ICON|NIF_MESSAGE|NIF_TIP; 
+		nid.uCallbackMessage = WM_SHOWTASK;//自定义的消息名称 
+		nid.hIcon = 0; 
+		strcpy(nid.szTip, "MPLK");		//信息提示条为“计划任务提醒”
+
+		::Shell_NotifyIcon(NIM_DELETE,&nid);//在托盘区添加图标
+
+		return 0;
+	}
 	if (wParam != IDR_MPLK)
 	{
 		return 1;
 	}
-
 	switch(lParam)
 	{
 	case WM_RBUTTONUP://右键起来时弹出快捷菜单，这里只有一个“关闭”
@@ -589,6 +604,7 @@ LRESULT wxf_kuwo::OnTray( UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandle
 	case WM_LBUTTONDBLCLK://双击左键的处理
 		{
 			::ShowWindow(m_hWnd, SW_SHOW);//简单的显示主窗口完事儿
+			SendMessage(WM_HIDETASK);
 		}
 		break;
 	}
@@ -615,6 +631,7 @@ LRESULT wxf_kuwo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	//case WM_ADDFILE:	   lRes = OnAddFile(uMsg, wParam, lParam, bHandled); break;
 	//case WM_PLAYCTL:	   lRes = OnPlayCtrl(uMsg, wParam, lParam, bHandled); break;
 	//case WM_DELITEM:	   lRes = OnDelItem(uMsg, wParam, lParam, bHandled); break;
+	case WM_HIDETASK:	   lRes = OnTray(uMsg, wParam, lParam, bHandled); break;
 	case WM_SHOWTASK:	   lRes = OnTray(uMsg, wParam, lParam, bHandled); break;
 	default:
 		bHandled = FALSE;

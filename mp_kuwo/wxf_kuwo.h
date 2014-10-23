@@ -5,6 +5,7 @@
 //#define WM_DELITEM						WM_USER + 0x0003
 //#define WM_TIMER25HZ						WM_USER + 0x0004
 #define WM_SHOWTASK							WM_USER + 0x0005
+#define WM_HIDETASK							WM_USER + 0x0006
 #define IDR_MPLK							0xA0000001
 
 class wxf_player;
