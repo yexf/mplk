@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "wxf_app.h"
 #include <commdlg.h>
 #include <Shlobj.h>
 bool DoFileDIRDlg(HWND hwnd,wxf_str &dirname)

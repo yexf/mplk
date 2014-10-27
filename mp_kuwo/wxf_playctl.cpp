@@ -9,7 +9,7 @@
 **
 ** Description:²¥·Å¿ØÖÆÆ÷
 **************************************************************************************/ 
-#include "pch.h"
+#include "wxf_app.h"
 
 
 wxf_playctl::wxf_playctl(CSliderUI *playprog,wxf_log *log)

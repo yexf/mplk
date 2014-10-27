@@ -10,7 +10,7 @@
 ** Description:播放列表 为播放控制器提供播放内容
 **************************************************************************************/ 
 #pragma once
-#include "pch.h"
+#include "wxf_app.h"
 enum loop_mode
 {
 	EM_LISTLOOP = 0,			//列表循环

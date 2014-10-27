@@ -9,7 +9,7 @@
 **
 ** Description:播放器 重新封装一些播放功能
 **************************************************************************************/ 
-#include "pch.h"
+#include "wxf_app.h"
 wxf_player *wxf_player::g_player = NULL;
 
 int wxf_player::ready(const char *file_name)

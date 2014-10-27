@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "wxf_app.h"
 #include "wxf_setting.h"
 
 bool wxf_setting::LoadSetting()

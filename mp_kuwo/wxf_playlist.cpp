@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "wxf_app.h"
 #include "wxf_filelist.h"
 #pragma warning(disable:4996)
 
