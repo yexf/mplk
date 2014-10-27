@@ -5,8 +5,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mp_gui", "mp_gui\mp_gui.vcp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mp_kuwo", "mp_kuwo\mp_kuwo.vcproj", "{3E7FA21D-8FF6-4704-AFE8-75CDC8CD3162}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wxf_base", "wxf_base\wxf_base.vcproj", "{8A674851-7A7B-4A92-8892-B1F14C20FD4F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,10 +19,6 @@ Global
 		{3E7FA21D-8FF6-4704-AFE8-75CDC8CD3162}.Debug|Win32.Build.0 = Debug|Win32
 		{3E7FA21D-8FF6-4704-AFE8-75CDC8CD3162}.Release|Win32.ActiveCfg = Release|Win32
 		{3E7FA21D-8FF6-4704-AFE8-75CDC8CD3162}.Release|Win32.Build.0 = Release|Win32
-		{8A674851-7A7B-4A92-8892-B1F14C20FD4F}.Debug|Win32.ActiveCfg = Debug|Win32
-		{8A674851-7A7B-4A92-8892-B1F14C20FD4F}.Debug|Win32.Build.0 = Debug|Win32
-		{8A674851-7A7B-4A92-8892-B1F14C20FD4F}.Release|Win32.ActiveCfg = Release|Win32
-		{8A674851-7A7B-4A92-8892-B1F14C20FD4F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

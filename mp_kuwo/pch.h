@@ -13,6 +13,7 @@ using namespace libZPlay;
 
 #define USE_GLOBE_LOG
 #include <wxf_base.h>
+using namespace std;
 
 #include "wxf_kuwo.h"
 #include "wxf_filedlg.h"
