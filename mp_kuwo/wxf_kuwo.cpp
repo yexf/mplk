@@ -1,5 +1,38 @@
 #include "pch.h"
 #include <shellapi.h>
+
+
+void ShowContextMenu(HWND hwnd, POINT *pt)
+{
+	//HMENU hMenu = LoadMenu(g_hInst, MAKEINTRESOURCE(IDC_CONTEXTMENU));
+	HMENU hMenu = CreatePopupMenu();
+	
+	AppendMenu(hMenu,MF_STRING,IDM_FORM_CLOSE,_T("关闭程序"));  
+	AppendMenu(hMenu,MF_STRING,IDM_FORM_OPEN,_T("打开主界面"));
+	AppendMenu(hMenu,MF_STRING,IDM_PLAY_NEXT,_T("下一曲"));  
+	AppendMenu(hMenu,MF_STRING,IDM_PLAY_PRE,_T("上一曲"));
+
+
+	// our window must be foreground before calling TrackPopupMenu or the menu will not disappear when the user clicks away
+	::SetForegroundWindow(hwnd);
+
+	// respect menu drop alignment
+	UINT uFlags = TPM_RIGHTBUTTON;
+	if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0)
+	{
+		uFlags |= TPM_RIGHTALIGN;
+	}
+	else
+	{
+		uFlags |= TPM_LEFTALIGN;
+	}
+	uFlags |= TPM_BOTTOMALIGN;
+
+	::TrackPopupMenuEx(hMenu, uFlags, pt->x, pt->y, hwnd, NULL);
+
+	::DestroyMenu(hMenu);
+	
+}
 wxf_kuwo::wxf_kuwo(void)
 {
 	m_use_timer = true;
@@ -564,6 +597,20 @@ LRESULT wxf_kuwo::OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bH
 }
 
 
+LRESULT wxf_kuwo::OnCommand( UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled )
+{ 
+	switch(LOWORD(wParam))  
+	{  
+	case IDM_FORM_CLOSE: SendMessage(WM_CLOSE); break;  
+	case IDM_FORM_OPEN: SendMessage(WM_SHOWTASK,IDR_MPLK,WM_LBUTTONDBLCLK); break;  
+	case IDM_PLAY_NEXT: PlayCtrl(m_pNext);break;
+	case IDM_PLAY_PRE: PlayCtrl(m_pPre);break;
+	case IDM_PLAY_PAUSE: PlayCtrl(m_pPause);break;
+	}   
+	return 0;
+}
+
+
 LRESULT wxf_kuwo::OnTray( UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
 	if (uMsg == WM_HIDETASK)
@@ -590,19 +637,11 @@ LRESULT wxf_kuwo::OnTray( UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandle
 	{
 	case WM_RBUTTONUP://右键起来时弹出快捷菜单，这里只有一个“关闭”
 		{
-			//LPPOINT lpoint=new tagPOINT;
-			//::GetCursorPos(lpoint);//得到鼠标位置
-			//CMenu menu;
-			//menu.CreatePopupMenu();//声明一个弹出式菜单
-			////增加菜单项“关闭”，点击则发送消息WM_DESTROY给主窗口（已
-			////隐藏），将程序结束。
-			//menu.AppendMenu(MF_STRING,WM_DESTROY,"关闭"); 
-			////确定弹出式菜单的位置
-			//menu.TrackPopupMenu(TPM_LEFTALIGN,lpoint->x,lpoint->y,this);
-			////资源回收
-			//HMENU hmenu=menu.Detach();
-			//menu.DestroyMenu();
-			//delete lpoint;
+			LPPOINT lpoint=new tagPOINT;
+			::GetCursorPos(lpoint);//得到鼠标位置
+			
+			ShowContextMenu(m_hWnd, lpoint);
+			delete lpoint;
 		}
 		break;
 	case WM_LBUTTONDBLCLK://双击左键的处理
@@ -613,7 +652,6 @@ LRESULT wxf_kuwo::OnTray( UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandle
 		}
 		break;
 	}
-	return 0;
 	return 0;
 }
 
@@ -638,6 +676,7 @@ LRESULT wxf_kuwo::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	//case WM_DELITEM:	   lRes = OnDelItem(uMsg, wParam, lParam, bHandled); break;
 	case WM_HIDETASK:	   lRes = OnTray(uMsg, wParam, lParam, bHandled); break;
 	case WM_SHOWTASK:	   lRes = OnTray(uMsg, wParam, lParam, bHandled); break;
+	case WM_COMMAND:	   lRes = OnCommand(uMsg, wParam, lParam, bHandled); break;
 	default:
 		bHandled = FALSE;
 	}
@@ -694,6 +733,5 @@ void wxf_kuwo::ToTary()
 	
 	::ShowWindow(m_hWnd, SW_HIDE);//隐藏主窗口 
 }
-
 #endif
 

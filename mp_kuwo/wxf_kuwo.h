@@ -8,6 +8,13 @@
 #define WM_HIDETASK							WM_USER + 0x0006
 #define IDR_MPLK							0xA0000001
 
+//¶¯Ì¬²Ëµ¥
+#define IDM_PLAY_NEXT						40001
+#define IDM_PLAY_PRE						40002
+#define IDM_PLAY_STOP						40003
+#define IDM_PLAY_PAUSE						40004
+#define IDM_FORM_CLOSE						40005
+#define IDM_FORM_OPEN						40006
 
 class wxf_player;
 class wxf_playlist;
@@ -44,6 +51,8 @@ public:
 	LRESULT OnGetMinMaxInfo(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	LRESULT OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	
+	LRESULT OnCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
