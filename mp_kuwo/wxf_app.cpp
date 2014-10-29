@@ -3,12 +3,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*l
 {
 	CPaintManagerUI::SetInstance(hInstance);
 
-#ifdef SKIN_ZIP
-	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath());
-	CPaintManagerUI::SetResourceZip("skin.dat");
-#else
 	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath()+"skin");
-#endif	
+
 
 	HRESULT Hr = ::CoInitialize(NULL);
 	if( FAILED(Hr) ) return 0;
