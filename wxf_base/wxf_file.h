@@ -1,7 +1,4 @@
 #pragma once
-
-#include <stdio.h>
-
 class wxf_file
 {
 public:

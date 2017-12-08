@@ -12,9 +12,6 @@
 #ifndef _wxf_log_h_
 #define _wxf_log_h_
 
-#include "wxf_lock.h"
-#include "wxf_file.h"
-
 /** @brief             日志文件默认容量(单位:字节)*/
 #define  MAX_LOG_FILE_SIZE        0x800000
 

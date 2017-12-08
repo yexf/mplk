@@ -9,10 +9,11 @@
 
 #pragma once
 
+#pragma warning(disable : 4786)//屏蔽4786错误
+
 #ifndef __cplusplus
 #error "wxf_base 是C++库，不能在C语言中引用"
 #endif
-
 
 
 // c_runtime lib
@@ -57,7 +58,7 @@
 #include <csignal>
 #include <ctime>
 
-typedef std::string string;
+using namespace std;
 
 #ifdef _WIN32
 	#include <Winsock2.h>
@@ -69,7 +70,7 @@ typedef std::string string;
 	#include <sys/stat.h>
 #endif
 
-#include "utils/wxf_define.h"
+#include "wxf_define.h"
 
 typedef unsigned int(WXF_STDCALL WXF_THREAD_ROUTINE)(void *);
 typedef WXF_THREAD_ROUTINE *			wxf_thdrt;
@@ -130,8 +131,7 @@ typedef struct
 	ushort wMilliseconds; 
 }systime;
 
-typedef SYSTEMTIME wxf_time;
-typedef size_t	SOCK_LEN;
+typedef SYSTEMTIME wxf_time;	
 
 //net 地址结构
 typedef struct _netaddr
@@ -210,23 +210,19 @@ bool IsGB2312(const char *pzInfo );
 int IsGB(char *pText);
 bool IsChinese(const char *pzInfo);
 
-#include "utils/wxf_str.h"
-#include "utils/wxf_lock.h"
-#include "utils/wxf_file.h"
-#include "utils/wxf_log.h"
-#include "utils/wxf_net.h"
-#include "utils/wxf_icov.h"
-#include "utils/wxf_singleton.hpp"
+#include "wxf_str.h"
+#include "wxf_lock.h"
+#include "wxf_file.h"
+#include "wxf_log.h"
+#include "wxf_icov.h"
+#include "wxf_singleton.hpp"
 
 #ifndef WXF_LIB
+#pragma comment(lib,"../lib/wxf_base.lib")
 #pragma comment(lib,"ws2_32.lib")
 #endif
 
-
-#ifndef WXF_LIB
-#ifdef _DEBUG
-#pragma comment(lib,"wxf_base_d.lib")
-#else
-#pragma comment(lib,"wxf_base.lib")
-#endif	//_DEBUG
-#endif	//WXF_LIB
+#ifdef WXF_VLD
+#include "vld/vld.h"
+#pragma comment(lib,"vld.lib")
+#endif

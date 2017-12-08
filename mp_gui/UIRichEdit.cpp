@@ -298,11 +298,31 @@ BOOL CTxtWinHost::Init(CRichEditUI *re, const CREATESTRUCT *pcs)
     }
 
     fInplaceActive = TRUE;
-
+#if _MSC_VER < 1700
     // Create Text Services component
     if(FAILED(CreateTextServices(NULL, this, &pUnk)))
         goto err;
-
+#else
+	HINSTANCE richHandle = NULL;
+	typedef HRESULT(_stdcall *_CTS)(
+		IUnknown *punkOuter,
+		ITextHost *pITextHost,
+		IUnknown **ppUnk);
+	_CTS CTS = NULL;
+	richHandle = LoadLibraryW(L"Riched20.dll");
+	if (richHandle == NULL)
+		exit(0);
+	else
+	{
+		CTS = (_CTS)GetProcAddress(richHandle, "CreateTextServices");
+		if (NULL == CTS)
+			exit(0);
+	}
+	// Create Text Services component
+	if (FAILED(CTS(NULL, this, &pUnk)))
+		goto err;
+	FreeLibrary(richHandle);
+#endif
     hr = pUnk->QueryInterface(IID_ITextServices,(void **)&pserv);
 
     // Whether the previous call succeeded or failed we are done

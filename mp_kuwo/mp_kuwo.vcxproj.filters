@@ -1,0 +1,1066 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="资源文件\skin">
+      <UniqueIdentifier>{496442d3-d62e-4396-84e6-c15ffdca61bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tinyxml">
+      <UniqueIdentifier>{b5487f17-2ab9-40d3-8bec-beea177b8a14}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="wxf_app.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wxf_filedlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wxf_filelist.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wxf_kuwo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wxf_listitem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wxf_mp3st.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wxf_playctl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wxf_player.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wxf_playlist.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wxf_setting.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinystr.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxml.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxmlerror.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxmlparser.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="wxf_app.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wxf_filedlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wxf_filelist.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wxf_kuwo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wxf_listitem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wxf_mp3st.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wxf_playctl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wxf_player.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wxf_playlist.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wxf_setting.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml\tinystr.h">
+      <Filter>tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml\tinyxml.h">
+      <Filter>tinyxml</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\bin\skin\skin.xml">
+      <Filter>资源文件</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\bin\skin\abc.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\ballonhorz.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\ballonvert.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\bk.jpg">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\bk_fullplaycontrol_mid.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\bk_fullplaycontrol_root.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\bk_main_blurboder.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\bk_main_boder.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\bk_Mini.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\bk_MiniVolume.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\bk_public_blurboder.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\bk_search_option.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\bk_stargreetings.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\bkmask_Mini.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\bkminisite.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\bord_search_dlg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_fullplaycontrol_next.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_fullplaycontrol_normal.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_fullplaycontrol_pause.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_fullplaycontrol_play.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_fullplaycontrol_pre.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_main_back.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_main_bkline.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_main_morechannel.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_main_refresh.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_main_restore.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_main_shrinkage.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_MiniClose.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_MiniFull.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_MiniLyric.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_MiniMin.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_MiniMute.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_MiniMuted.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_MiniNext.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_MiniPause.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_MiniPlay.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_MiniPlaylist.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_MiniPre.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_MiniVolumn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_musictool_bk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_musictool_close.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_netsong_artist.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_netsong_channeldrop.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_netsong_operation.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_netsong_play.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_netsong_searchartist.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_netsong_searchdrop.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_pl_qulity_perfect.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_remind.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_skinwnd_add.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_skinwnd_tab.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_uidownload_arrangeicon.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_uidownload_common.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_uidownload_copytool.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_uidownload_localmusic.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_uidownload_operatorbk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_userinfo_level.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\btn_userinfo_photo.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\BtnStatBkg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\button_breathskin.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\button_uidownload_startdown.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\CasualListenContinue.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\CasualListenListName.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\CasualListenMyChannel.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\CasualListenMyChannelBkg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\CasualListenNext.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\CasualListenPause.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\CasualListenPlay.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\CasualListenRecycle.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\CasualListenRedHeart.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\CasualListenSepLine.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\CasualListenSongName.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\CasualListenWhiteHeart.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\cfg_bk_layout.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\cfg_btn_selectNav.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\cfg_edit.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\cfg_itemsel_bk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\cfg_line.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\cfg_list_header_bk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\cfg_list_title.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\cfg_logo.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\cfg_logo_bk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\cfg_mask.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\cfg_radio.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\cfg_sb_down.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\cfg_sb_up.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\changeskin.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\channelbtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\checkbox.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\close.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\defaultface.jpg">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_bkimage.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_btn_bk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_Close.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_COLOR_highlight.jpg">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_COLOR_nomal.jpg">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_Config.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_KaraOK.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_Lock.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_PIC_highlight.jpg">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_PIC_nomal.jpg">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_Search.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_SplitLine.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_Switch.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_Themes.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_ToolBK.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_ZoomIn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DL_ZoomOut.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\Download.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\DragBack.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\dropdown_common_cfg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\edit_netsong_search.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\edit_netsong_searchartist.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\edit_netsong_searchhover.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\eqdlg_btn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\eqdlg_thumb.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\eqdlg_volumn_horbk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\eqdlg_volumn_horfg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\eqdlg_volumn_vertbk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\eqdlg_volumn_vertfg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\escfullscreen.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\exclamation.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\FavoriteLoginBkg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\fftbk.jpg">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\Heart.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\HQ.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon.ico">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_harmonydlg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_tool_AddToolBtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_tool_AutoShutDown.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_tool_ID100.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_tool_ID104.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_tool_ID11.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_tool_ID12.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_tool_ID165.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_tool_ID166.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_tool_ID167.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_byartist.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_bydir.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_commonselect.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_delete.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_downed.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_downing.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_leftbk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_localemptywndbk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_mqbk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_pause.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_reco.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_refresh.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_songquality.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_start.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_stop.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_uidownload_toppanel.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_updatetipdlg_arraw.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_updatetipdlg_level.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_updatetipdlg_line.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_updatetipdlg_mask.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\icon_updatetipdlg_titlelogo.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\label_MiniSep.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\list_netsong_add.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\list_netsong_change.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\list_netsong_defartist.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\list_netsong_download.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\list_netsong_head.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\list_netsong_headsep.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\list_netsong_hot.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\list_netsong_MV.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\list_netsong_play.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\list_netsong_quility.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\list_netsong_sort.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\listheader_public_bk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\loading.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\login_result.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\loginbanner1.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\loginbanner2.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\logo.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\lrc_btn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\lyric_mv.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\lyric_mv_icon.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\lyricmask.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\lyrictip.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mainbtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mainedit.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mask.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mask_MiniVolume.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\max.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\menu.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\menu_common_bk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\menu_common_groupline.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\menu_common_hstatus.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\menu_common_nstatus.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\menu_common_sel.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\menu_icon.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\min.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mini.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\minilogo.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\minisite_header_vip.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\modbarbk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\modbarbtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\musicgame_btn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\musictool_btn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\musictool_line.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\MusicToolBorder.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mutebtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mutebtn_tray.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mutedbtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mutedbtn_tray.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\MV.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mvfullscreen.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mvmodbar.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mvmodbarbtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mvmodsplitter.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\mvtopmost.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\newskinflag.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\nextbtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\option_main_artist.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\option_main_categroy.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\option_main_downing.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\option_main_download.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\option_main_fang.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\option_main_game.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\option_main_lyricmv.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\option_main_ranking.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\option_main_recommend.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\option_main_search.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\option_main_ucenter.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\option_main_vip.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\pausebtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PL_Qulity_General.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PL_Qulity_High.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PL_Qulity_MV_General.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PL_Qulity_MV_High.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PL_Qulity_Perfect.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PL_Qulity_Super.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PL_Shadow.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\playbtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\playcontrolbk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlayerProgress.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlayerProgressBar.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlayerProgressBar_breath.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistBottomBkg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistBottomBtnBkg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistBottomShadow.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistBtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistBtnIcoAdd.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistBtnIcoDel.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistBtnIcoFind.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistBtnIcoModeCircle.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistBtnIcoModeOrder.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistBtnIcoModeRand.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistBtnIcoModeSingle.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistClassList.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistCreateBtnBkg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistDefaultList.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistFindBkg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistFindClose.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistFindEdit.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistFindIco.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistFindPost.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistFindPre.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistLogin.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistSepBkg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistShare.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistTopBtnCausal.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistTopBtnFavorite.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistTopBtnList.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistTopBtnNameCasualListen.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistTopBtnNameFavorite.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistTopBtnNameList.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistTopPlayingTag.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\PlaylistTriangle.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\popupwnd_kwttdownload.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\popwnd_android.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\popwnd_border.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\popwnd_closebtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\popwnd_dest_kwttdownload.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\popwnd_dest_kwttupdate.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\popwnd_mask.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\popwnd_phone.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\popwnd_point.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\prebtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\process_uidownload_bk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\process_uidownload_progress.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\progress_common.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\progress_fullplaycontrol_bk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\progress_fullplaycontrol_download.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\progress_fullplaycontrol_fg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\progress_fullplaycontrol_thumb.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\scrollbar_public_h.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\scrollbar_public_thumb_h.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\scrollbar_public_thumb_v.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\scrollbar_public_v.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\searchbtn.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\Share.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\simplemv.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\skindelete.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\slider_skinwnd_bk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\slider_skinwnd_thumb.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\star_icon_bk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\starlogo.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\tab_main_light.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\tab_netsong_specially.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\tab_netsong_speciallybk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\TrayIconTimer.bmp">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\userinfo_ballon.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\userinfo_border.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\vip.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\vip_logo.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\vip_minisite_border.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\vip_opening_header.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\vip_point.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\volumnbk.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\volumnfg.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\volumnthumb.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\volumnthumb_tray.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\webpopwnd_border.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\webpopwnd_mask.png">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+    <Image Include="..\bin\skin\Win7Taskicon.bmp">
+      <Filter>资源文件\skin</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

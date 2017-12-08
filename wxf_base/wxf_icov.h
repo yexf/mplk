@@ -28,31 +28,29 @@
 #ifndef __UIUTIL_H__
 #define __UIUTIL_H__
 
-#include <Windows.h>
-
 #ifdef _MSC_VER
 #pragma once
 #endif
 
 namespace StringConvertor {
 
-#pragma warning(disable:4996)
+#pragma warning(disable: 4996)
 
 	LPSTR  WideToAnsi(LPCWSTR str, int len = -1);
 	LPSTR  WideToUtf8(LPCWSTR str, int len = -1);
 	LPWSTR WideStrDup(LPCWSTR str, int len = -1);
 
 	LPWSTR AnsiToWide(LPCSTR  str, int len = -1);
-	LPSTR  AnsiToUtf8(LPCSTR  str, int len = -1);
-	LPSTR  AnsiStrDup(LPCSTR  str, int len = -1);
+	__declspec(deprecated) LPSTR  AnsiToUtf8(LPCSTR  str, int len = -1);
+	__declspec(deprecated) LPSTR  AnsiStrDup(LPCSTR  str, int len = -1);
 
 	LPWSTR Utf8ToWide(LPCSTR  str, int len = -1);
-	LPSTR  Utf8ToAnsi(LPCSTR  str, int len = -1);
+	__declspec(deprecated) LPSTR  Utf8ToAnsi(LPCSTR  str, int len = -1);
 	static __inline LPSTR Utf8StrDup(LPCSTR str, int len = -1)    { return AnsiStrDup(str, len); }
 
 	//StringAlloc takes the number of characters, not bytes!
-	LPWSTR StringAllocW(size_t len);
-	LPSTR  StringAllocA(size_t len);
+	__declspec(deprecated) LPWSTR StringAllocW(size_t len);
+	__declspec(deprecated) LPSTR  StringAllocA(size_t len);
 	void   StringFree(LPWSTR str);
 	void   StringFree(LPSTR str);
 

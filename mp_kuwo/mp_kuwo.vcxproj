@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3E7FA21D-8FF6-4704-AFE8-75CDC8CD3162}</ProjectGuid>
+    <RootNamespace>mp_kuwo</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\bin\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\include;..\wxf_base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)kuwo.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="tinyxml\tinystr.cpp" />
+    <ClCompile Include="tinyxml\tinyxml.cpp" />
+    <ClCompile Include="tinyxml\tinyxmlerror.cpp" />
+    <ClCompile Include="tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="wxf_app.cpp" />
+    <ClCompile Include="wxf_filedlg.cpp" />
+    <ClCompile Include="wxf_filelist.cpp" />
+    <ClCompile Include="wxf_kuwo.cpp" />
+    <ClCompile Include="wxf_listitem.cpp" />
+    <ClCompile Include="wxf_mp3st.cpp" />
+    <ClCompile Include="wxf_playctl.cpp" />
+    <ClCompile Include="wxf_player.cpp" />
+    <ClCompile Include="wxf_playlist.cpp" />
+    <ClCompile Include="wxf_setting.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tinyxml\tinystr.h" />
+    <ClInclude Include="tinyxml\tinyxml.h" />
+    <ClInclude Include="wxf_app.h" />
+    <ClInclude Include="wxf_filedlg.h" />
+    <ClInclude Include="wxf_filelist.h" />
+    <ClInclude Include="wxf_kuwo.h" />
+    <ClInclude Include="wxf_listitem.h" />
+    <ClInclude Include="wxf_mp3st.h" />
+    <ClInclude Include="wxf_playctl.h" />
+    <ClInclude Include="wxf_player.h" />
+    <ClInclude Include="wxf_playlist.h" />
+    <ClInclude Include="wxf_setting.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\bin\skin\skin.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\bin\skin\abc.png" />
+    <Image Include="..\bin\skin\ballonhorz.png" />
+    <Image Include="..\bin\skin\ballonvert.png" />
+    <Image Include="..\bin\skin\bk.jpg" />
+    <Image Include="..\bin\skin\bkmask_Mini.png" />
+    <Image Include="..\bin\skin\bkminisite.png" />
+    <Image Include="..\bin\skin\bk_fullplaycontrol_mid.png" />
+    <Image Include="..\bin\skin\bk_fullplaycontrol_root.png" />
+    <Image Include="..\bin\skin\bk_main_blurboder.png" />
+    <Image Include="..\bin\skin\bk_main_boder.png" />
+    <Image Include="..\bin\skin\bk_Mini.png" />
+    <Image Include="..\bin\skin\bk_MiniVolume.png" />
+    <Image Include="..\bin\skin\bk_public_blurboder.png" />
+    <Image Include="..\bin\skin\bk_search_option.png" />
+    <Image Include="..\bin\skin\bk_stargreetings.png" />
+    <Image Include="..\bin\skin\bord_search_dlg.png" />
+    <Image Include="..\bin\skin\BtnStatBkg.png" />
+    <Image Include="..\bin\skin\btn_fullplaycontrol_next.png" />
+    <Image Include="..\bin\skin\btn_fullplaycontrol_normal.png" />
+    <Image Include="..\bin\skin\btn_fullplaycontrol_pause.png" />
+    <Image Include="..\bin\skin\btn_fullplaycontrol_play.png" />
+    <Image Include="..\bin\skin\btn_fullplaycontrol_pre.png" />
+    <Image Include="..\bin\skin\btn_main_back.png" />
+    <Image Include="..\bin\skin\btn_main_bkline.png" />
+    <Image Include="..\bin\skin\btn_main_morechannel.png" />
+    <Image Include="..\bin\skin\btn_main_refresh.png" />
+    <Image Include="..\bin\skin\btn_main_restore.png" />
+    <Image Include="..\bin\skin\btn_main_shrinkage.png" />
+    <Image Include="..\bin\skin\btn_MiniClose.png" />
+    <Image Include="..\bin\skin\btn_MiniFull.png" />
+    <Image Include="..\bin\skin\btn_MiniLyric.png" />
+    <Image Include="..\bin\skin\btn_MiniMin.png" />
+    <Image Include="..\bin\skin\btn_MiniMute.png" />
+    <Image Include="..\bin\skin\btn_MiniMuted.png" />
+    <Image Include="..\bin\skin\btn_MiniNext.png" />
+    <Image Include="..\bin\skin\btn_MiniPause.png" />
+    <Image Include="..\bin\skin\btn_MiniPlay.png" />
+    <Image Include="..\bin\skin\btn_MiniPlaylist.png" />
+    <Image Include="..\bin\skin\btn_MiniPre.png" />
+    <Image Include="..\bin\skin\btn_MiniVolumn.png" />
+    <Image Include="..\bin\skin\btn_musictool_bk.png" />
+    <Image Include="..\bin\skin\btn_musictool_close.png" />
+    <Image Include="..\bin\skin\btn_netsong_artist.png" />
+    <Image Include="..\bin\skin\btn_netsong_channeldrop.png" />
+    <Image Include="..\bin\skin\btn_netsong_operation.png" />
+    <Image Include="..\bin\skin\btn_netsong_play.png" />
+    <Image Include="..\bin\skin\btn_netsong_searchartist.png" />
+    <Image Include="..\bin\skin\btn_netsong_searchdrop.png" />
+    <Image Include="..\bin\skin\btn_pl_qulity_perfect.png" />
+    <Image Include="..\bin\skin\btn_remind.png" />
+    <Image Include="..\bin\skin\btn_skinwnd_add.png" />
+    <Image Include="..\bin\skin\btn_skinwnd_tab.png" />
+    <Image Include="..\bin\skin\btn_uidownload_arrangeicon.png" />
+    <Image Include="..\bin\skin\btn_uidownload_common.png" />
+    <Image Include="..\bin\skin\btn_uidownload_copytool.png" />
+    <Image Include="..\bin\skin\btn_uidownload_localmusic.png" />
+    <Image Include="..\bin\skin\btn_uidownload_operatorbk.png" />
+    <Image Include="..\bin\skin\btn_userinfo_level.png" />
+    <Image Include="..\bin\skin\btn_userinfo_photo.png" />
+    <Image Include="..\bin\skin\button_breathskin.png" />
+    <Image Include="..\bin\skin\button_uidownload_startdown.png" />
+    <Image Include="..\bin\skin\CasualListenContinue.png" />
+    <Image Include="..\bin\skin\CasualListenListName.png" />
+    <Image Include="..\bin\skin\CasualListenMyChannel.png" />
+    <Image Include="..\bin\skin\CasualListenMyChannelBkg.png" />
+    <Image Include="..\bin\skin\CasualListenNext.png" />
+    <Image Include="..\bin\skin\CasualListenPause.png" />
+    <Image Include="..\bin\skin\CasualListenPlay.png" />
+    <Image Include="..\bin\skin\CasualListenRecycle.png" />
+    <Image Include="..\bin\skin\CasualListenRedHeart.png" />
+    <Image Include="..\bin\skin\CasualListenSepLine.png" />
+    <Image Include="..\bin\skin\CasualListenSongName.png" />
+    <Image Include="..\bin\skin\CasualListenWhiteHeart.png" />
+    <Image Include="..\bin\skin\cfg_bk_layout.png" />
+    <Image Include="..\bin\skin\cfg_btn_selectNav.png" />
+    <Image Include="..\bin\skin\cfg_edit.png" />
+    <Image Include="..\bin\skin\cfg_itemsel_bk.png" />
+    <Image Include="..\bin\skin\cfg_line.png" />
+    <Image Include="..\bin\skin\cfg_list_header_bk.png" />
+    <Image Include="..\bin\skin\cfg_list_title.png" />
+    <Image Include="..\bin\skin\cfg_logo.png" />
+    <Image Include="..\bin\skin\cfg_logo_bk.png" />
+    <Image Include="..\bin\skin\cfg_mask.png" />
+    <Image Include="..\bin\skin\cfg_radio.png" />
+    <Image Include="..\bin\skin\cfg_sb_down.png" />
+    <Image Include="..\bin\skin\cfg_sb_up.png" />
+    <Image Include="..\bin\skin\changeskin.png" />
+    <Image Include="..\bin\skin\channelbtn.png" />
+    <Image Include="..\bin\skin\checkbox.png" />
+    <Image Include="..\bin\skin\close.png" />
+    <Image Include="..\bin\skin\defaultface.jpg" />
+    <Image Include="..\bin\skin\DL_bkimage.png" />
+    <Image Include="..\bin\skin\DL_btn_bk.png" />
+    <Image Include="..\bin\skin\DL_Close.png" />
+    <Image Include="..\bin\skin\DL_COLOR_highlight.jpg" />
+    <Image Include="..\bin\skin\DL_COLOR_nomal.jpg" />
+    <Image Include="..\bin\skin\DL_Config.png" />
+    <Image Include="..\bin\skin\DL_KaraOK.png" />
+    <Image Include="..\bin\skin\DL_Lock.png" />
+    <Image Include="..\bin\skin\DL_PIC_highlight.jpg" />
+    <Image Include="..\bin\skin\DL_PIC_nomal.jpg" />
+    <Image Include="..\bin\skin\DL_Search.png" />
+    <Image Include="..\bin\skin\DL_SplitLine.png" />
+    <Image Include="..\bin\skin\DL_Switch.png" />
+    <Image Include="..\bin\skin\DL_Themes.png" />
+    <Image Include="..\bin\skin\DL_ToolBK.png" />
+    <Image Include="..\bin\skin\DL_ZoomIn.png" />
+    <Image Include="..\bin\skin\DL_ZoomOut.png" />
+    <Image Include="..\bin\skin\Download.png" />
+    <Image Include="..\bin\skin\DragBack.png" />
+    <Image Include="..\bin\skin\dropdown_common_cfg.png" />
+    <Image Include="..\bin\skin\edit_netsong_search.png" />
+    <Image Include="..\bin\skin\edit_netsong_searchartist.png" />
+    <Image Include="..\bin\skin\edit_netsong_searchhover.png" />
+    <Image Include="..\bin\skin\eqdlg_btn.png" />
+    <Image Include="..\bin\skin\eqdlg_thumb.png" />
+    <Image Include="..\bin\skin\eqdlg_volumn_horbk.png" />
+    <Image Include="..\bin\skin\eqdlg_volumn_horfg.png" />
+    <Image Include="..\bin\skin\eqdlg_volumn_vertbk.png" />
+    <Image Include="..\bin\skin\eqdlg_volumn_vertfg.png" />
+    <Image Include="..\bin\skin\escfullscreen.png" />
+    <Image Include="..\bin\skin\exclamation.png" />
+    <Image Include="..\bin\skin\FavoriteLoginBkg.png" />
+    <Image Include="..\bin\skin\fftbk.jpg" />
+    <Image Include="..\bin\skin\Heart.png" />
+    <Image Include="..\bin\skin\HQ.png" />
+    <Image Include="..\bin\skin\icon.ico" />
+    <Image Include="..\bin\skin\icon_harmonydlg.png" />
+    <Image Include="..\bin\skin\icon_tool_AddToolBtn.png" />
+    <Image Include="..\bin\skin\icon_tool_AutoShutDown.png" />
+    <Image Include="..\bin\skin\icon_tool_ID100.png" />
+    <Image Include="..\bin\skin\icon_tool_ID104.png" />
+    <Image Include="..\bin\skin\icon_tool_ID11.png" />
+    <Image Include="..\bin\skin\icon_tool_ID12.png" />
+    <Image Include="..\bin\skin\icon_tool_ID165.png" />
+    <Image Include="..\bin\skin\icon_tool_ID166.png" />
+    <Image Include="..\bin\skin\icon_tool_ID167.png" />
+    <Image Include="..\bin\skin\icon_uidownload_byartist.png" />
+    <Image Include="..\bin\skin\icon_uidownload_bydir.png" />
+    <Image Include="..\bin\skin\icon_uidownload_commonselect.png" />
+    <Image Include="..\bin\skin\icon_uidownload_delete.png" />
+    <Image Include="..\bin\skin\icon_uidownload_downed.png" />
+    <Image Include="..\bin\skin\icon_uidownload_downing.png" />
+    <Image Include="..\bin\skin\icon_uidownload_leftbk.png" />
+    <Image Include="..\bin\skin\icon_uidownload_localemptywndbk.png" />
+    <Image Include="..\bin\skin\icon_uidownload_mqbk.png" />
+    <Image Include="..\bin\skin\icon_uidownload_pause.png" />
+    <Image Include="..\bin\skin\icon_uidownload_reco.png" />
+    <Image Include="..\bin\skin\icon_uidownload_refresh.png" />
+    <Image Include="..\bin\skin\icon_uidownload_songquality.png" />
+    <Image Include="..\bin\skin\icon_uidownload_start.png" />
+    <Image Include="..\bin\skin\icon_uidownload_stop.png" />
+    <Image Include="..\bin\skin\icon_uidownload_toppanel.png" />
+    <Image Include="..\bin\skin\icon_updatetipdlg_arraw.png" />
+    <Image Include="..\bin\skin\icon_updatetipdlg_level.png" />
+    <Image Include="..\bin\skin\icon_updatetipdlg_line.png" />
+    <Image Include="..\bin\skin\icon_updatetipdlg_mask.png" />
+    <Image Include="..\bin\skin\icon_updatetipdlg_titlelogo.png" />
+    <Image Include="..\bin\skin\label_MiniSep.png" />
+    <Image Include="..\bin\skin\listheader_public_bk.png" />
+    <Image Include="..\bin\skin\list_netsong_add.png" />
+    <Image Include="..\bin\skin\list_netsong_change.png" />
+    <Image Include="..\bin\skin\list_netsong_defartist.png" />
+    <Image Include="..\bin\skin\list_netsong_download.png" />
+    <Image Include="..\bin\skin\list_netsong_head.png" />
+    <Image Include="..\bin\skin\list_netsong_headsep.png" />
+    <Image Include="..\bin\skin\list_netsong_hot.png" />
+    <Image Include="..\bin\skin\list_netsong_MV.png" />
+    <Image Include="..\bin\skin\list_netsong_play.png" />
+    <Image Include="..\bin\skin\list_netsong_quility.png" />
+    <Image Include="..\bin\skin\list_netsong_sort.png" />
+    <Image Include="..\bin\skin\loading.png" />
+    <Image Include="..\bin\skin\loginbanner1.png" />
+    <Image Include="..\bin\skin\loginbanner2.png" />
+    <Image Include="..\bin\skin\login_result.png" />
+    <Image Include="..\bin\skin\logo.png" />
+    <Image Include="..\bin\skin\lrc_btn.png" />
+    <Image Include="..\bin\skin\lyricmask.png" />
+    <Image Include="..\bin\skin\lyrictip.png" />
+    <Image Include="..\bin\skin\lyric_mv.png" />
+    <Image Include="..\bin\skin\lyric_mv_icon.png" />
+    <Image Include="..\bin\skin\mainbtn.png" />
+    <Image Include="..\bin\skin\mainedit.png" />
+    <Image Include="..\bin\skin\mask.png" />
+    <Image Include="..\bin\skin\mask_MiniVolume.png" />
+    <Image Include="..\bin\skin\max.png" />
+    <Image Include="..\bin\skin\menu.png" />
+    <Image Include="..\bin\skin\menu_common_bk.png" />
+    <Image Include="..\bin\skin\menu_common_groupline.png" />
+    <Image Include="..\bin\skin\menu_common_hstatus.png" />
+    <Image Include="..\bin\skin\menu_common_nstatus.png" />
+    <Image Include="..\bin\skin\menu_common_sel.png" />
+    <Image Include="..\bin\skin\menu_icon.png" />
+    <Image Include="..\bin\skin\min.png" />
+    <Image Include="..\bin\skin\mini.png" />
+    <Image Include="..\bin\skin\minilogo.png" />
+    <Image Include="..\bin\skin\minisite_header_vip.png" />
+    <Image Include="..\bin\skin\modbarbk.png" />
+    <Image Include="..\bin\skin\modbarbtn.png" />
+    <Image Include="..\bin\skin\musicgame_btn.png" />
+    <Image Include="..\bin\skin\MusicToolBorder.png" />
+    <Image Include="..\bin\skin\musictool_btn.png" />
+    <Image Include="..\bin\skin\musictool_line.png" />
+    <Image Include="..\bin\skin\mutebtn.png" />
+    <Image Include="..\bin\skin\mutebtn_tray.png" />
+    <Image Include="..\bin\skin\mutedbtn.png" />
+    <Image Include="..\bin\skin\mutedbtn_tray.png" />
+    <Image Include="..\bin\skin\MV.png" />
+    <Image Include="..\bin\skin\mvfullscreen.png" />
+    <Image Include="..\bin\skin\mvmodbar.png" />
+    <Image Include="..\bin\skin\mvmodbarbtn.png" />
+    <Image Include="..\bin\skin\mvmodsplitter.png" />
+    <Image Include="..\bin\skin\mvtopmost.png" />
+    <Image Include="..\bin\skin\newskinflag.png" />
+    <Image Include="..\bin\skin\nextbtn.png" />
+    <Image Include="..\bin\skin\option_main_artist.png" />
+    <Image Include="..\bin\skin\option_main_categroy.png" />
+    <Image Include="..\bin\skin\option_main_downing.png" />
+    <Image Include="..\bin\skin\option_main_download.png" />
+    <Image Include="..\bin\skin\option_main_fang.png" />
+    <Image Include="..\bin\skin\option_main_game.png" />
+    <Image Include="..\bin\skin\option_main_lyricmv.png" />
+    <Image Include="..\bin\skin\option_main_ranking.png" />
+    <Image Include="..\bin\skin\option_main_recommend.png" />
+    <Image Include="..\bin\skin\option_main_search.png" />
+    <Image Include="..\bin\skin\option_main_ucenter.png" />
+    <Image Include="..\bin\skin\option_main_vip.png" />
+    <Image Include="..\bin\skin\pausebtn.png" />
+    <Image Include="..\bin\skin\playbtn.png" />
+    <Image Include="..\bin\skin\playcontrolbk.png" />
+    <Image Include="..\bin\skin\PlayerProgress.png" />
+    <Image Include="..\bin\skin\PlayerProgressBar.png" />
+    <Image Include="..\bin\skin\PlayerProgressBar_breath.png" />
+    <Image Include="..\bin\skin\PlaylistBottomBkg.png" />
+    <Image Include="..\bin\skin\PlaylistBottomBtnBkg.png" />
+    <Image Include="..\bin\skin\PlaylistBottomShadow.png" />
+    <Image Include="..\bin\skin\PlaylistBtn.png" />
+    <Image Include="..\bin\skin\PlaylistBtnIcoAdd.png" />
+    <Image Include="..\bin\skin\PlaylistBtnIcoDel.png" />
+    <Image Include="..\bin\skin\PlaylistBtnIcoFind.png" />
+    <Image Include="..\bin\skin\PlaylistBtnIcoModeCircle.png" />
+    <Image Include="..\bin\skin\PlaylistBtnIcoModeOrder.png" />
+    <Image Include="..\bin\skin\PlaylistBtnIcoModeRand.png" />
+    <Image Include="..\bin\skin\PlaylistBtnIcoModeSingle.png" />
+    <Image Include="..\bin\skin\PlaylistClassList.png" />
+    <Image Include="..\bin\skin\PlaylistCreateBtnBkg.png" />
+    <Image Include="..\bin\skin\PlaylistDefaultList.png" />
+    <Image Include="..\bin\skin\PlaylistFindBkg.png" />
+    <Image Include="..\bin\skin\PlaylistFindClose.png" />
+    <Image Include="..\bin\skin\PlaylistFindEdit.png" />
+    <Image Include="..\bin\skin\PlaylistFindIco.png" />
+    <Image Include="..\bin\skin\PlaylistFindPost.png" />
+    <Image Include="..\bin\skin\PlaylistFindPre.png" />
+    <Image Include="..\bin\skin\PlaylistLogin.png" />
+    <Image Include="..\bin\skin\PlaylistSepBkg.png" />
+    <Image Include="..\bin\skin\PlaylistShare.png" />
+    <Image Include="..\bin\skin\PlaylistTopBtnCausal.png" />
+    <Image Include="..\bin\skin\PlaylistTopBtnFavorite.png" />
+    <Image Include="..\bin\skin\PlaylistTopBtnList.png" />
+    <Image Include="..\bin\skin\PlaylistTopBtnNameCasualListen.png" />
+    <Image Include="..\bin\skin\PlaylistTopBtnNameFavorite.png" />
+    <Image Include="..\bin\skin\PlaylistTopBtnNameList.png" />
+    <Image Include="..\bin\skin\PlaylistTopPlayingTag.png" />
+    <Image Include="..\bin\skin\PlaylistTriangle.png" />
+    <Image Include="..\bin\skin\PL_Qulity_General.png" />
+    <Image Include="..\bin\skin\PL_Qulity_High.png" />
+    <Image Include="..\bin\skin\PL_Qulity_MV_General.png" />
+    <Image Include="..\bin\skin\PL_Qulity_MV_High.png" />
+    <Image Include="..\bin\skin\PL_Qulity_Perfect.png" />
+    <Image Include="..\bin\skin\PL_Qulity_Super.png" />
+    <Image Include="..\bin\skin\PL_Shadow.png" />
+    <Image Include="..\bin\skin\popupwnd_kwttdownload.png" />
+    <Image Include="..\bin\skin\popwnd_android.png" />
+    <Image Include="..\bin\skin\popwnd_border.png" />
+    <Image Include="..\bin\skin\popwnd_closebtn.png" />
+    <Image Include="..\bin\skin\popwnd_dest_kwttdownload.png" />
+    <Image Include="..\bin\skin\popwnd_dest_kwttupdate.png" />
+    <Image Include="..\bin\skin\popwnd_mask.png" />
+    <Image Include="..\bin\skin\popwnd_phone.png" />
+    <Image Include="..\bin\skin\popwnd_point.png" />
+    <Image Include="..\bin\skin\prebtn.png" />
+    <Image Include="..\bin\skin\process_uidownload_bk.png" />
+    <Image Include="..\bin\skin\process_uidownload_progress.png" />
+    <Image Include="..\bin\skin\progress_common.png" />
+    <Image Include="..\bin\skin\progress_fullplaycontrol_bk.png" />
+    <Image Include="..\bin\skin\progress_fullplaycontrol_download.png" />
+    <Image Include="..\bin\skin\progress_fullplaycontrol_fg.png" />
+    <Image Include="..\bin\skin\progress_fullplaycontrol_thumb.png" />
+    <Image Include="..\bin\skin\scrollbar_public_h.png" />
+    <Image Include="..\bin\skin\scrollbar_public_thumb_h.png" />
+    <Image Include="..\bin\skin\scrollbar_public_thumb_v.png" />
+    <Image Include="..\bin\skin\scrollbar_public_v.png" />
+    <Image Include="..\bin\skin\searchbtn.png" />
+    <Image Include="..\bin\skin\Share.png" />
+    <Image Include="..\bin\skin\simplemv.png" />
+    <Image Include="..\bin\skin\skindelete.png" />
+    <Image Include="..\bin\skin\slider_skinwnd_bk.png" />
+    <Image Include="..\bin\skin\slider_skinwnd_thumb.png" />
+    <Image Include="..\bin\skin\starlogo.png" />
+    <Image Include="..\bin\skin\star_icon_bk.png" />
+    <Image Include="..\bin\skin\tab_main_light.png" />
+    <Image Include="..\bin\skin\tab_netsong_specially.png" />
+    <Image Include="..\bin\skin\tab_netsong_speciallybk.png" />
+    <Image Include="..\bin\skin\TrayIconTimer.bmp" />
+    <Image Include="..\bin\skin\userinfo_ballon.png" />
+    <Image Include="..\bin\skin\userinfo_border.png" />
+    <Image Include="..\bin\skin\vip.png" />
+    <Image Include="..\bin\skin\vip_logo.png" />
+    <Image Include="..\bin\skin\vip_minisite_border.png" />
+    <Image Include="..\bin\skin\vip_opening_header.png" />
+    <Image Include="..\bin\skin\vip_point.png" />
+    <Image Include="..\bin\skin\volumnbk.png" />
+    <Image Include="..\bin\skin\volumnfg.png" />
+    <Image Include="..\bin\skin\volumnthumb.png" />
+    <Image Include="..\bin\skin\volumnthumb_tray.png" />
+    <Image Include="..\bin\skin\webpopwnd_border.png" />
+    <Image Include="..\bin\skin\webpopwnd_mask.png" />
+    <Image Include="..\bin\skin\Win7Taskicon.bmp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
