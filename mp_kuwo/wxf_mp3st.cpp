@@ -11,8 +11,13 @@
 **************************************************************************************/ 
 #include "wxf_mp3st.h"
 #include "id3tag.h"
+#ifdef _DEBUG
+#pragma comment(lib,"../lib/libid3tag_d.lib")
+#pragma comment(lib,"../lib/libz_d.lib")
+#else
 #pragma comment(lib,"../lib/libid3tag.lib")
 #pragma comment(lib,"../lib/libz.lib")
+#endif
 #pragma warning(disable:4996)
 
 typedef id3_file *	id3_file_t;

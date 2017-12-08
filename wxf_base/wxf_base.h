@@ -218,8 +218,12 @@ bool IsChinese(const char *pzInfo);
 #include "wxf_singleton.hpp"
 
 #ifndef WXF_LIB
-#pragma comment(lib,"../lib/wxf_base.lib")
 #pragma comment(lib,"ws2_32.lib")
+#ifdef _DEBUG
+#pragma comment(lib,"../lib/wxf_base_d.lib")
+#else
+#pragma comment(lib,"../lib/wxf_base.lib")
+#endif
 #endif
 
 #ifdef WXF_VLD
