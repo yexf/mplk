@@ -61,7 +61,7 @@
     <Link>
       <OutputFile>$(OutDir)$(ProjectName)_d.dll</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>..\lib\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\lib\$(TargetName)_d.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
